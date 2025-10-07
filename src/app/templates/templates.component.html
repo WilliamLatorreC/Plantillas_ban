@@ -1,0 +1,46 @@
+<div class="container">
+  <!-- SECCIÓN IZQUIERDA: GUION -->
+  <div class="guion">
+    <h2>Guion de lectura</h2>
+
+    <select [(ngModel)]="guionSeleccionado" class="select-guion">
+      <option *ngFor="let g of guiones" [ngValue]="g">{{ g.nombre }}</option>
+    </select>
+
+    <div class="guion-texto">
+      <pre>{{ guionSeleccionado.contenido
+        .replace('{{nombre}}', nombre || 'Cliente')
+        .replace('{{producto}}', producto || 'Producto') }}</pre>
+    </div>
+  </div>
+
+  <!-- SECCIÓN DERECHA: FORMULARIO Y PLANTILLAS -->
+  <div class="contenido">
+    <h2>Generador de Plantillas</h2>
+
+    <form class="formulario" (submit)="generarPlantilla($event)">
+      <input type="text" placeholder="Nombre" [(ngModel)]="nombre" name="nombre" required />
+      <input type="text" placeholder="Contenido" [(ngModel)]="producto" name="producto" required />
+      <button type="submit">Generar plantilla</button>
+    </form>
+
+    <div class="resultado" *ngIf="plantillaGenerada">
+      <h3>Plantilla generada:</h3>
+      <p>{{ plantillaGenerada }}</p>
+      <button (click)="guardarPlantilla()">Guardar plantilla</button>
+    </div>
+
+    <h2>Plantillas guardadas</h2>
+    <ul class="faq-list">
+      <li *ngFor="let p of plantillas; let i = index">
+        <div class="faq-header" (click)="toggleFAQ(i)">
+          {{ p.nombre }} - {{ p.producto }}
+          <span class="arrow" [class.open]="p.abierta">▼</span>
+        </div>
+        <div class="faq-body" *ngIf="p.abierta">
+          {{ p.contenido }}
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
