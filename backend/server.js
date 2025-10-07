@@ -17,7 +17,9 @@ app.post('/generate-template', (req, res) => {
     res.json({ plantilla });
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`✅ Servidor backend en http://localhost:${PORT}`);
+app.get('/', (req, res) => {
+  res.send('Servidor funcionando correctamente 🚀');
 });
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));
