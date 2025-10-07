@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import axios from 'axios';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { environment } from '../environment'; // ✅ asegúrate de que esta ruta es correcta
 
 interface Plantilla {
   id: number;
@@ -14,32 +15,42 @@ interface Plantilla {
 @Component({
   selector: 'app-templates',
   standalone: true,
-  imports: [NgIf, FormsModule, CommonModule],
+  imports: [CommonModule, NgIf, FormsModule, HttpClientModule],
   templateUrl: './templates.component.html',
-  styleUrl: './templates.component.css'
+  styleUrls: ['./templates.component.css']
 })
 export class TemplatesComponent {
-   nombre = '';
+  // ===== VARIABLES =====
+  nombre = '';
   producto = '';
   plantillaGenerada = '';
   plantillas: Plantilla[] = [];
+  guionSeleccionado: any;
 
-  // ===== NUEVO: Plantillas predefinidas =====
+  private apiUrl = environment.apiUrl; // ✅ se ajusta automáticamente según el entorno
+
+  constructor(private http: HttpClient) {
+    // Inicializa las plantillas
+    this.plantillas = [...this.plantillasPredefinidas];
+    this.guionSeleccionado = this.guiones[0];
+  }
+
+  // ===== PLANTILLAS PREDEFINIDAS =====
   plantillasPredefinidas: Plantilla[] = [
     {
       id: 1,
       nombre: 'Envio de OTP',
       producto: 'Reporting OTP',
       contenido:
-        'Buen dia. El cliente se comunica para el envio de la OTP, ya que al cliente no le llegaba a su telefono',
+        'Buen día. El cliente se comunica para el envío de la OTP, ya que al cliente no le llegaba a su teléfono.',
       abierta: false,
     },
     {
       id: 2,
       nombre: 'Envio de Link',
-      producto: 'Reporting Aceptacion',
+      producto: 'Reporting Aceptación',
       contenido:
-        'Buen dia. El cliente se comunica para el envio del link de aceptacion de documentos, ya que al cliente no le llegaba a su correo.',
+        'Buen día. El cliente se comunica para el envío del link de aceptación de documentos, ya que al cliente no le llegaba a su correo.',
       abierta: false,
     },
     {
@@ -52,60 +63,56 @@ export class TemplatesComponent {
     },
   ];
 
-  // ===== NUEVO: Guiones predefinidos =====
+  // ===== GUIONES PREDEFINIDOS =====
   guiones = [
     {
       id: 1,
       nombre: '🛍️ Guion de bienvenida Mesa',
-      contenido: `Buen dia Bienvenid@ a la mesa de servicios Sarita.
-      Mi nombre es [Nombre del agente] ¿Como puedo ayudarle hoy?
-      
-      Validacion de datos:
-      - Nombres y apellidos
-      - usuario de red
-      `
+      contenido: `Buen día. Bienvenid@ a la mesa de servicios Sarita.
+Mi nombre es [Nombre del agente]. ¿Cómo puedo ayudarle hoy?
+
+Validación de datos:
+- Nombres y apellidos
+- Usuario de red`
     },
     {
       id: 2,
       nombre: '🙏 Guion de Bienvenida Libranza',
-      contenido: `Buen dia Bienvenid@ a la mesa de servicios Sarita para libranza.
-      Mi nombre es [Nombre del agente] ¿Como puedo ayudarle hoy?`
+      contenido: `Buen día. Bienvenid@ a la mesa de servicios Sarita para libranza.
+Mi nombre es [Nombre del agente]. ¿Cómo puedo ayudarle hoy?`
     },
     {
       id: 3,
-      nombre: '🔔 Chequeo de conformmidad',
-      contenido: `¿Puedo ayudarle en algo mas?
-      ¿Le puedo colaborar en algo mas?
-      
-      Indicar el numero del servicio
-      - El numero de su servicios es XXXXXX
-      - Le confirmo el numero de radicado o caso XXXXXXX
-      `
+      nombre: '🔔 Chequeo de conformidad',
+      contenido: `¿Puedo ayudarle en algo más?
+¿Le puedo colaborar en algo más?
+
+Indicar el número del servicio:
+- El número de su servicio es XXXXXX
+- Le confirmo el número de radicado o caso XXXXXXX`
     }
   ];
 
-  guionSeleccionado = this.guiones[0]; // Guion por defecto
-
-  constructor() {
-    // Inicializa las plantillas con las predefinidas
-    this.plantillas = [...this.plantillasPredefinidas];
-  }
-
-  async generarPlantilla(event: Event) {
+  // ===== GENERAR PLANTILLA =====
+  generarPlantilla(event: Event) {
     event.preventDefault();
-    try {
-      const res = await axios.post('http://localhost:3000/generate-template', {
-        nombre: this.nombre,
-        producto: this.producto
-      });
-      this.plantillaGenerada = res.data.plantilla;
-    } catch (err) {
-      console.error(err);
-    }
+    this.http.post<{ plantilla: string }>(
+      `${this.apiUrl}/generate-template`,
+      { nombre: this.nombre, producto: this.producto }
+    ).subscribe({
+      next: (res) => {
+        this.plantillaGenerada = res.plantilla;
+      },
+      error: (err) => {
+        console.error('Error al generar plantilla', err);
+        alert('❌ No se pudo generar la plantilla. Verifica la conexión con el servidor.');
+      }
+    });
   }
 
+  // ===== GUARDAR PLANTILLA =====
   guardarPlantilla() {
-    if (!this.plantillaGenerada) return;
+    if (!this.plantillaGenerada.trim()) return;
 
     const nueva: Plantilla = {
       id: Date.now(),
@@ -117,6 +124,11 @@ export class TemplatesComponent {
 
     this.plantillas.push(nueva);
     alert('✅ Plantilla guardada correctamente');
+    this.resetFormulario();
+  }
+
+  // ===== UTILIDAD =====
+  resetFormulario() {
     this.plantillaGenerada = '';
     this.nombre = '';
     this.producto = '';
