@@ -4,19 +4,19 @@ import bodyParser from 'body-parser';
 
 const app = express();
 
-// URL del frontend desplegado en Render
+// ✅ URL del FRONTEND
 const FRONTEND_URL = 'https://plantillas-ban-1.onrender.com';
 
-// Configurar CORS
+// 🔹 Configurar CORS
 app.use(cors({
-  origin: FRONTEND_URL, // Permite solicitudes solo desde tu frontend
+  origin: FRONTEND_URL,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
 
 app.use(bodyParser.json());
 
-// 👉 Endpoint para generar plantilla SIN fecha
+// 👉 Endpoint para generar plantilla
 app.post('/generate-template', (req, res) => {
   const { nombre, producto } = req.body;
   const plantilla = `
@@ -27,6 +27,7 @@ app.post('/generate-template', (req, res) => {
   res.json({ plantilla });
 });
 
+// 👉 Endpoint de prueba
 app.get('/', (req, res) => {
   res.send('Servidor funcionando correctamente 🚀');
 });
