@@ -1,0 +1,48 @@
+<div class="templates-container">
+  <!-- Panel izquierdo -->
+  <section class="info-panel">
+    <h2>📄 Plantillas disponibles</h2>
+    <p class="subtitle">
+      Selecciona una plantilla para ver su contenido o editarla.
+    </p>
+
+    <div class="search-box">
+      <input
+        type="text"
+        [(ngModel)]="busqueda"
+        placeholder="🔍 Buscar plantilla..."
+      />
+    </div>
+
+    <div class="template-list">
+      <div
+        class="template-card"
+        *ngFor="let plantilla of plantillasFiltradas">
+        (click)="seleccionarPlantilla(plantilla)"
+      >
+        <h3>{{ plantilla.nombre }}</h3>
+        <p>{{ plantilla.contenido  }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Panel derecho -->
+  <section class="preview-panel" *ngIf="plantillaSeleccionada">
+    <h2>👁️ Vista previa</h2>
+    <div class="preview-content">
+      <h3>{{ plantillaSeleccionada.nombre }}</h3>
+      <p>{{ plantillaSeleccionada.contenido }}</p>
+    </div>
+
+    <div class="actions">
+      <button (click)="editarPlantilla(plantillaSeleccionada)">
+        ✏️ Editar
+      </button>
+      <button (click)="eliminarPlantilla(plantillaSeleccionada._id)">Eliminar</button>
+    </div>
+  </section>
+
+  <section class="empty-preview" *ngIf="!plantillaSeleccionada">
+    <p>Selecciona una plantilla del panel izquierdo para verla aquí.</p>
+  </section>
+</div>

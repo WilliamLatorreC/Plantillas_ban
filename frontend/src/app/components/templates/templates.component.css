@@ -1,0 +1,136 @@
+.templates-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  padding: 2rem;
+  height: 100vh;
+  background: #f8fafc;
+  color: #1e293b;
+  font-family: "Inter", sans-serif;
+}
+
+/* Panel izquierdo */
+.info-panel {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.info-panel h2 {
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+}
+
+.search-box input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.template-list {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.template-card {
+  background: #f1f5f9;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.template-card:hover {
+  background: #e2e8f0;
+  transform: scale(1.02);
+}
+
+.template-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.template-card p {
+  margin: 0.3rem 0 0;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+/* Panel derecho */
+.preview-panel {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-top: 1rem;
+  background: #f8fafc;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+button {
+  background: #3b82f6;
+  border: none;
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+button.delete {
+  background: #ef4444;
+}
+
+button.delete:hover {
+  background: #dc2626;
+}
+
+/* Pantalla vacía */
+.empty-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8fafc;
+  color: #64748b;
+  font-size: 1.1rem;
+  border-radius: 1rem;
+}

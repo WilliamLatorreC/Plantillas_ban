@@ -1,14 +1,11 @@
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import { provideRouter } from '@angular/router';
-import { routes } from './app/app.routes';
-import { TemplatesComponent } from './app/templates/templates.component';
+import { importProvidersFrom } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
-bootstrapApplication(TemplatesComponent, {
-  ...appConfig,
+bootstrapApplication(AppComponent, {
   providers: [
-    ...(appConfig.providers || []),
-    provideRouter(routes)
+    importProvidersFrom(HttpClientModule, FormsModule)
   ]
 }).catch(err => console.error(err));
