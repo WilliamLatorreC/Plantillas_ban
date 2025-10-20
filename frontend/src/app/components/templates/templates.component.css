@@ -188,3 +188,17 @@
   border-radius: 6px;
   font-size: 0.95rem;
 }
+
+/* Resaltar plantillas que coinciden con la búsqueda */
+.template-card.destacado {
+  background-color: #fef3c7; /* Amarillo suave */
+  border: 1px solid #facc15;
+  transform: scale(1.02);
+}
+
+template-card mark {
+  background-color: #fde68a; /* amarillo suave */
+  color: #92400e;           /* texto más oscuro para contraste */
+  padding: 0 2px;
+  border-radius: 3px;
+}

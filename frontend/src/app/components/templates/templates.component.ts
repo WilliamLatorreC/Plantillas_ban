@@ -57,6 +57,27 @@ export class TemplatesComponent implements OnInit {
     this.productosAbiertos[producto] = !this.productosAbiertos[producto];
   }
 
+  expandirProductosPorBusqueda(): void {
+  if (!this.busqueda.trim()) {
+    // Si la búsqueda está vacía, cerramos todos los productos
+    this.productos.forEach(prod => this.productosAbiertos[prod] = false);
+    return;
+  }
+
+  // Si hay búsqueda, abrimos solo los productos que tienen coincidencias
+  this.productos.forEach(prod => {
+    const coincidencias = this.getPlantillasPorProducto(prod).length > 0 ||
+                          prod.toLowerCase().includes(this.busqueda.toLowerCase());
+    this.productosAbiertos[prod] = coincidencias;
+  });
+}
+
+resaltarCoincidencias(texto: string): string {
+  if (!this.busqueda.trim()) return texto;
+  const regex = new RegExp(`(${this.busqueda})`, 'gi');
+  return texto.replace(regex, `<mark>$1</mark>`);
+}
+
   getPlantillasPorProducto(producto: string): Plantilla[] {
     return this.plantillas
       .filter(p => p.producto === producto)
@@ -143,5 +164,15 @@ export class TemplatesComponent implements OnInit {
     this.producto = '';
     this.plantillaGenerada = '';
     this.plantillaSeleccionada = null;
+  }
+
+  // ===== PRODUCTOS FILTRADOS SEGÚN LA BÚSQUEDA =====
+  get productosFiltrados(): string[] {
+    if (!this.busqueda.trim()) return this.productos;
+
+    return this.productos.filter(prod => 
+      this.getPlantillasPorProducto(prod).length > 0 ||
+      prod.toLowerCase().includes(this.busqueda.toLowerCase())
+    );
   }
 }

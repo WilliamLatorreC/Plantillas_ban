@@ -5,12 +5,16 @@
     <p class="subtitle">Selecciona un producto para ver sus plantillas.</p>
 
     <div class="search-box">
-      <input type="text" [(ngModel)]="busqueda" placeholder="🔍 Buscar producto o plantilla..." />
+      <input type="text" [(ngModel)]="busqueda" placeholder="🔍 Buscar producto o plantilla..." (ngModelChange)="expandirProductosPorBusqueda()"/>
     </div>
 
     <div class="template-list">
       <div *ngFor="let prod of productos">
-        <div class="producto-card" (click)="toggleProducto(prod)">
+        <div 
+          class="producto-card"
+          [class.destacado-producto]="prod.toLowerCase().includes(busqueda.toLowerCase())"
+          (click)="toggleProducto(prod)"
+        >
           <strong>{{ prod }}</strong>
         </div>
         <div class="plantilla-sublist" *ngIf="productosAbiertos[prod]">
@@ -18,6 +22,7 @@
             class="template-card"
             *ngFor="let plantilla of getPlantillasPorProducto(prod)"
             (click)="seleccionarPlantilla(plantilla)"
+            [innerHTML]="resaltarCoincidencias(plantilla.nombre)"
           >
             {{ plantilla.nombre }}
           </div>
