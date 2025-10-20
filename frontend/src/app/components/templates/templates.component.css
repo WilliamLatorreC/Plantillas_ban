@@ -84,43 +84,70 @@
   flex-direction: column;
 }
 
-.preview-content {
-  flex-grow: 1;
-  overflow-y: auto;
-  margin-top: 1rem;
-  background: #f8fafc;
-  padding: 1rem;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+/* Inputs y textarea para edición */
+.preview-panel .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
-.actions {
+.preview-panel .form-group label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  color: #1e293b;
+}
+
+.preview-panel .form-group input,
+.preview-panel .form-group textarea {
+  padding: 0.7rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s;
+  font-family: "Inter", sans-serif;
+  font-size: 0.95rem;
+  background: #f8fafc;
+}
+
+.preview-panel .form-group input:focus,
+.preview-panel .form-group textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.preview-panel .form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Botones dentro del panel derecho */
+.preview-panel .actions {
   display: flex;
   justify-content: flex-end;
   gap: 0.8rem;
   margin-top: 1rem;
 }
 
-button {
+.preview-panel .actions .btn {
   background: #3b82f6;
   border: none;
   color: white;
-  padding: 0.7rem 1.2rem;
+  padding: 0.6rem 1.2rem;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s;
 }
 
-button:hover {
+.preview-panel .actions .btn:hover {
   background: #2563eb;
 }
 
-button.delete {
+.preview-panel .actions .btn.btn-danger {
   background: #ef4444;
 }
 
-button.delete:hover {
+.preview-panel .actions .btn.btn-danger:hover {
   background: #dc2626;
 }
 
@@ -133,4 +160,31 @@ button.delete:hover {
   color: #64748b;
   font-size: 1.1rem;
   border-radius: 1rem;
+}
+
+.producto-card {
+  background: #e0f2fe;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.producto-card:hover {
+  background: #bae6fd;
+}
+
+.plantilla-sublist {
+  margin-left: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.plantilla-sublist .template-card {
+  background: #f1f5f9;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.3rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
 }

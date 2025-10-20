@@ -1,0 +1,80 @@
+/* Contenedor principal */
+.create-template-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", sans-serif;
+  color: #1e293b;
+}
+
+/* Títulos */
+.create-template-container h2 {
+  margin-bottom: 1rem;
+}
+
+/* Campos del formulario */
+.create-template-container form .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.create-template-container label {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.create-template-container input,
+.create-template-container textarea {
+  padding: 0.7rem 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.create-template-container input:focus,
+.create-template-container textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* Textarea */
+.create-template-container textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Botones */
+.create-template-container button {
+  background: #3b82f6;
+  border: none;
+  color: white;
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.create-template-container button:hover {
+  background: #2563eb;
+}
+
+.create-template-container button:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Mensaje de éxito o error */
+.create-template-container .alert {
+  margin-top: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  background: #f1f5f9;
+  color: #1e293b;
+  font-size: 0.95rem;
+}

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 
 export interface Plantilla {
@@ -7,29 +8,34 @@ export interface Plantilla {
   nombre: string;
   producto: string;
   contenido: string;
-  fechaCreacion?: string;
 }
+
 @Injectable({
   providedIn: 'root'
 })
 export class PlantillaService {
-
-  private apiUrl = 'https://plantillas-ban.onrender.com/plantillas';
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
-  // 🔹 Obtener todas las plantillas
+  // ===== OBTENER TODAS LAS PLANTILLAS =====
   getPlantillas(): Observable<Plantilla[]> {
-    return this.http.get<Plantilla[]>(this.apiUrl);
+    return this.http.get<Plantilla[]>(`${this.apiUrl}/plantillas`);
   }
 
-  // 🔹 Guardar una nueva plantilla
-  savePlantilla(plantilla: Plantilla): Observable<Plantilla> {
-    return this.http.post<Plantilla>(this.apiUrl, plantilla);
+  // ===== CREAR PLANTILLA =====
+  crearPlantilla(plantilla: Plantilla): Observable<Plantilla> {
+    return this.http.post<Plantilla>(`${this.apiUrl}/plantillas`, plantilla);
   }
 
-  // 🔹 Eliminar una plantilla (opcional)
-  deletePlantilla(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  // ===== ACTUALIZAR PLANTILLA =====
+  actualizarPlantilla(plantilla: Plantilla): Observable<Plantilla> {
+    if (!plantilla._id) throw new Error('ID de plantilla requerido');
+    return this.http.put<Plantilla>(`${this.apiUrl}/plantillas/${plantilla._id}`, plantilla);
+  }
+
+  // ===== ELIMINAR PLANTILLA =====
+  eliminarPlantilla(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/plantillas/${id}`);
   }
 }

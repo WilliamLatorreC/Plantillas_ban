@@ -2,26 +2,26 @@
   <!-- Panel izquierdo -->
   <section class="info-panel">
     <h2>📄 Plantillas disponibles</h2>
-    <p class="subtitle">
-      Selecciona una plantilla para ver su contenido o editarla.
-    </p>
+    <p class="subtitle">Selecciona un producto para ver sus plantillas.</p>
 
     <div class="search-box">
-      <input
-        type="text"
-        [(ngModel)]="busqueda"
-        placeholder="🔍 Buscar plantilla..."
-      />
+      <input type="text" [(ngModel)]="busqueda" placeholder="🔍 Buscar producto o plantilla..." />
     </div>
 
     <div class="template-list">
-      <div
-        class="template-card"
-        *ngFor="let plantilla of plantillasFiltradas">
-        (click)="seleccionarPlantilla(plantilla)"
-      >
-        <h3>{{ plantilla.nombre }}</h3>
-        <p>{{ plantilla.contenido  }}</p>
+      <div *ngFor="let prod of productos">
+        <div class="producto-card" (click)="toggleProducto(prod)">
+          <strong>{{ prod }}</strong>
+        </div>
+        <div class="plantilla-sublist" *ngIf="productosAbiertos[prod]">
+          <div
+            class="template-card"
+            *ngFor="let plantilla of getPlantillasPorProducto(prod)"
+            (click)="seleccionarPlantilla(plantilla)"
+          >
+            {{ plantilla.nombre }}
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -30,19 +30,27 @@
   <section class="preview-panel" *ngIf="plantillaSeleccionada">
     <h2>👁️ Vista previa</h2>
     <div class="preview-content">
-      <h3>{{ plantillaSeleccionada.nombre }}</h3>
-      <p>{{ plantillaSeleccionada.contenido }}</p>
+      <div class="form-group">
+        <label>Nombre:</label>
+        <input type="text" [(ngModel)]="nombre" />
+      </div>
+      <div class="form-group">
+        <label>Producto:</label>
+        <input type="text" [(ngModel)]="producto" />
+      </div>
+      <div class="form-group">
+        <label>Contenido:</label>
+        <textarea [(ngModel)]="plantillaGenerada"></textarea>
+      </div>
     </div>
 
     <div class="actions">
-      <button (click)="editarPlantilla(plantillaSeleccionada)">
-        ✏️ Editar
-      </button>
-      <button (click)="eliminarPlantilla(plantillaSeleccionada._id)">Eliminar</button>
+      <button (click)="actualizarPlantilla()">✏️ Actualizar</button>
+      <button (click)="eliminarPlantilla(plantillaSeleccionada._id)" class="delete">🗑️ Eliminar</button>
     </div>
   </section>
 
   <section class="empty-preview" *ngIf="!plantillaSeleccionada">
-    <p>Selecciona una plantilla del panel izquierdo para verla aquí.</p>
+    <p>Selecciona una plantilla para verla aquí.</p>
   </section>
 </div>

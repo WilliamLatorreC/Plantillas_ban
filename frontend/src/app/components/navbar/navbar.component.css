@@ -1,0 +1,49 @@
+.navbar {
+  display: flex;
+  justify-content: center; /* centra los botones */
+  align-items: center;
+  background: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 0 0 12px 12px;
+  font-family: "Inter", sans-serif;
+}
+
+.navbar-content {
+  display: flex;
+  gap: 1rem;
+}
+
+/* Botones del navbar */
+.navbar .btn {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.navbar .btn:hover {
+  background: #2563eb;
+}
+
+/* Botón secundario */
+.navbar .btn.btn-secondary {
+  background: #64748b;
+}
+
+.navbar .btn.btn-secondary:hover {
+  background: #475569;
+}
+
+/* Botón peligro */
+.navbar .btn.btn-danger {
+  background: #ef4444;
+}
+
+.navbar .btn.btn-danger:hover {
+  background: #dc2626;
+}
