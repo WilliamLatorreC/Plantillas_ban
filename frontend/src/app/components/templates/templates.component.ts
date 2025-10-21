@@ -9,6 +9,7 @@ interface Plantilla {
   nombre: string;
   producto: string;
   contenido: string;
+  resolucion?: string;
   abierta?: boolean;
 }
 
@@ -26,7 +27,9 @@ export class TemplatesComponent implements OnInit {
 
   nombre = '';
   producto = '';
+  resolucion = '';
   plantillaGenerada = '';
+  
 
   productos: string[] = [];
   productosAbiertos: { [key: string]: boolean } = {}; // Para controlar expansión
@@ -91,11 +94,12 @@ resaltarCoincidencias(texto: string): string {
     this.plantillaSeleccionada = plantilla;
     this.nombre = plantilla.nombre;
     this.producto = plantilla.producto;
+    this.resolucion = plantilla.resolucion || '';
     this.plantillaGenerada = plantilla.contenido;
   }
 
   guardarPlantilla(): void {
-    if (!this.nombre.trim() || !this.producto.trim() || !this.plantillaGenerada.trim()) {
+    if (!this.nombre.trim() || !this.producto.trim() || !this.plantillaGenerada.trim() || !this.resolucion.trim()) {
       alert('Completa todos los campos');
       return;
     }
@@ -103,6 +107,7 @@ resaltarCoincidencias(texto: string): string {
     const nueva: Plantilla = {
       nombre: this.nombre,
       producto: this.producto,
+      resolucion: this.resolucion,
       contenido: this.plantillaGenerada
     };
 
@@ -125,6 +130,7 @@ resaltarCoincidencias(texto: string): string {
     const actualizada: Plantilla = {
       nombre: this.nombre,
       producto: this.producto,
+      resolucion: this.resolucion,
       contenido: this.plantillaGenerada
     };
 
@@ -163,6 +169,7 @@ resaltarCoincidencias(texto: string): string {
     this.nombre = '';
     this.producto = '';
     this.plantillaGenerada = '';
+    this.resolucion = '',
     this.plantillaSeleccionada = null;
   }
 

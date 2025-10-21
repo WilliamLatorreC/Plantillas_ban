@@ -19,7 +19,8 @@ export class CreateTemplatesComponent {
     this.plantillaForm = this.fb.group({
       nombre: ['', Validators.required],
       producto: ['', Validators.required],
-      contenido: ['', Validators.required]
+      contenido: ['', Validators.required],
+      resolucion: ['', Validators.required]
     });
   }
 

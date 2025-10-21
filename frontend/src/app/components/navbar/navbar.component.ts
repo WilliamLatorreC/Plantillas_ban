@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
     <div class="navbar-content">
       <button class="btn" (click)="ir('/')">Inicio</button>
       <button class="btn btn-secondary" (click)="ir('/crear-plantilla')">Crear Plantilla</button>
+      <button class="btn btn-secondary" (click)="ir('/categorias')">Crear categorias</button>
     </div>
   </nav>
   `,

@@ -3,13 +3,17 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import Plantilla from './models/Plantilla.js';
+import categoriaRoutes from './routes/categorias.js';
 
 const app = express();
+
+// ✅ Configurar CORS
 app.use(cors({
   origin: ['http://localhost:4200', 'https://plantillas-ban-1.onrender.com'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   credentials: true
 }));
+
 app.use(bodyParser.json());
 
 // ✅ Conexión a MongoDB Atlas
@@ -17,6 +21,9 @@ const MONGO_URI = "mongodb+srv://andresroot:andres2003@cluster0.dw4y432.mongodb.
 mongoose.connect(MONGO_URI)
   .then(() => console.log("✅ Conectado a MongoDB Atlas"))
   .catch(err => console.error("❌ Error de conexión a MongoDB:", err));
+
+// ✅ Rutas de Categorías
+app.use('/categorias', categoriaRoutes);
 
 // =============================
 // 🔹 ENDPOINTS CRUD DE PLANTILLAS
@@ -69,6 +76,6 @@ app.get('/', (req, res) => {
   res.send('Servidor funcionando correctamente 🚀');
 });
 
-// Servidor
+// ✅ Iniciar servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`✅ Servidor backend en puerto ${PORT}`));
