@@ -1,35 +1,33 @@
-.templates-container {
+/* 🌐 CONTENEDOR PRINCIPAL */
+.contenedor-general {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 1.5rem;
   height: 100vh;
+  padding: 2rem;
   background: #f8fafc;
   color: #1e293b;
   font-family: "Inter", sans-serif;
 }
 
-/* Panel izquierdo */
-.info-panel {
-  background: white;
-  padding: 1.5rem;
+/* PANEL IZQUIERDO */
+.panel-izquierdo {
+  background: #ffffff;
   border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
-.info-panel h2 {
-  margin-bottom: 0.5rem;
-}
-
-.subtitle {
-  font-size: 0.9rem;
-  color: #64748b;
+.panel-izquierdo h3 {
   margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: #1e3a8a;
 }
 
-.search-box input {
+.buscador {
   width: 100%;
   padding: 0.7rem 1rem;
   border: 1px solid #cbd5e1;
@@ -39,99 +37,140 @@
   transition: all 0.2s;
 }
 
-.search-box input:focus {
+.buscador:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
-.template-list {
-  overflow-y: auto;
-  flex-grow: 1;
-}
-
-.template-card {
-  background: #f1f5f9;
-  padding: 1rem;
+/* Producto y plantillas */
+.producto-titulo {
+  background: #e0f2fe;
+  color: #1e40af;
+  padding: 0.8rem 1rem;
   border-radius: 8px;
-  margin-bottom: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  transition: all 0.2s;
+  margin-bottom: 0.4rem;
 }
 
-.template-card:hover {
-  background: #e2e8f0;
+.producto-titulo:hover {
+  background: #bae6fd;
   transform: scale(1.02);
 }
 
-.template-card h3 {
-  margin: 0;
-  font-size: 1.1rem;
+.lista-plantillas {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
 }
 
-.template-card p {
-  margin: 0.3rem 0 0;
-  font-size: 0.9rem;
-  color: #64748b;
+.item-plantilla {
+  background: #f1f5f9;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
-/* Panel derecho */
-.preview-panel {
-  background: white;
-  padding: 1.5rem;
+.item-plantilla:hover {
+  background: #e2e8f0;
+}
+
+.item-plantilla.activa {
+  background: #dbeafe;
+  border: 1px solid #3b82f6;
+  font-weight: 600;
+}
+
+/* PANEL DERECHO */
+.panel-derecho {
+  background: #ffffff;
   border-radius: 1rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
 }
 
-/* Inputs y textarea para edición */
-.preview-panel .form-group {
+/* PESTAÑAS */
+.tabs {
   display: flex;
-  flex-direction: column;
+  border-bottom: 2px solid #e2e8f0;
   margin-bottom: 1rem;
 }
 
-.preview-panel .form-group label {
+.tabs button {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0.8rem 0;
+  cursor: pointer;
   font-weight: 500;
-  margin-bottom: 0.3rem;
-  color: #1e293b;
+  color: #475569;
+  transition: all 0.2s;
+  font-size: 0.95rem;
 }
 
-.preview-panel .form-group input,
-.preview-panel .form-group textarea {
+.tabs button.active {
+  color: #1d4ed8;
+  border-bottom: 3px solid #3b82f6;
+  font-weight: 600;
+}
+
+.tabs button:hover {
+  background: #f1f5f9;
+  color: #2563eb;
+}
+
+/* VISTA PREVIA */
+.vista-previa {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.vista-previa h3 {
+  margin-bottom: 1rem;
+  color: #1e3a8a;
+}
+
+.form-control {
+  width: 100%;
   padding: 0.7rem 1rem;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
+  background: #f8fafc;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
   outline: none;
   transition: all 0.2s;
-  font-family: "Inter", sans-serif;
-  font-size: 0.95rem;
-  background: #f8fafc;
 }
 
-.preview-panel .form-group input:focus,
-.preview-panel .form-group textarea:focus {
+.form-control:focus {
   border-color: #3b82f6;
   box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
 
-.preview-panel .form-group textarea {
-  resize: vertical;
-  min-height: 100px;
+label {
+  font-weight: 500;
+  color: #1e293b;
+  margin-bottom: 0.3rem;
 }
 
-/* Botones dentro del panel derecho */
-.preview-panel .actions {
+/* BOTONES */
+.botones {
   display: flex;
   justify-content: flex-end;
   gap: 0.8rem;
   margin-top: 1rem;
 }
 
-.preview-panel .actions .btn {
+.btn-azul {
   background: #3b82f6;
-  border: none;
   color: white;
+  border: none;
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
   cursor: pointer;
@@ -139,66 +178,177 @@
   transition: all 0.2s;
 }
 
-.preview-panel .actions .btn:hover {
+.btn-azul:hover {
   background: #2563eb;
 }
 
-.preview-panel .actions .btn.btn-danger {
+.btn-rojo {
   background: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
 }
 
-.preview-panel .actions .btn.btn-danger:hover {
+.btn-rojo:hover {
   background: #dc2626;
 }
 
-/* Pantalla vacía */
-.empty-preview {
+.btn-rojo[disabled]{
+  background-color: #4a4a4a;
+  color: #a0a0a0;          
+  opacity: 0.6;            
+  cursor: not-allowed;  
+}
+
+/* VISTA CATEGORÍAS */
+.vista-categorias {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.vista-categorias h3 {
+  color: #1e3a8a;
+  margin-bottom: 1rem;
+}
+
+.categoria-item {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 0.8rem;
+  transition: all 0.2s;
+}
+
+.categoria-item:hover {
+  background: #dbeafe;
+  transform: scale(1.01);
+}
+
+.categoria-item h4 {
+  margin: 0;
+  color: #1e40af;
+  font-weight: 600;
+}
+
+.categoria-item p {
+  margin: 0.3rem 0;
+  color: #475569;
+}
+
+.categoria-item small {
+  color: #64748b;
+}
+
+/* 📭 Mensaje cuando no hay plantilla seleccionada */
+.sin-plantilla {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f8fafc;
+  height: 100%;
+  text-align: center;
   color: #64748b;
-  font-size: 1.1rem;
-  border-radius: 1rem;
+  font-size: 1.05rem;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 2rem;
+  animation: fadeIn 0.6s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-.producto-card {
-  background: #e0f2fe;
-  padding: 0.7rem 1rem;
-  border-radius: 8px;
-  margin-bottom: 0.3rem;
+.sin-plantilla p {
+  margin: 0;
+  opacity: 0.9;
+}
+
+.sin-plantilla strong {
+  color: #1e3a8a;
+}
+
+.sin-categorias {
+   display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 83%;
+  text-align: center;
+  color: #64748b;
+  font-size: 1.05rem;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 2rem;
+  animation: fadeIn 0.6s ease-in-out;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* ✨ Animación suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*Efecto filtler*/
+.buscador {
+  width: 93%;
+  padding: 10px 14px;
+  border: 2px solid #2563eb;
+  border-radius: 10px;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.buscador:focus {
+  box-shadow: 0 0 8px rgba(37, 99, 235, 0.4);
+  border-color: #1e3a8a;
+}
+
+/* 🪄 Animación al abrir/cerrar grupos */
+.lista-plantillas {
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.producto-titulo {
   cursor: pointer;
-  font-weight: 600;
+  background: #e0f2fe;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 6px;
+  transition: all 0.2s;
+}
+
+.producto-titulo:hover {
+  background: #bfdbfe;
+  color: #1e3a8a;
+}
+
+.item-plantilla {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
   transition: background 0.2s;
 }
 
-.producto-card:hover {
-  background: #bae6fd;
+.item-plantilla:hover {
+  background: #eff6ff;
+  color: #1e40af;
 }
 
-.plantilla-sublist {
-  margin-left: 1rem;
-  margin-bottom: 0.8rem;
-}
-
-.plantilla-sublist .template-card {
-  background: #f1f5f9;
-  padding: 0.5rem 1rem;
-  margin-bottom: 0.3rem;
-  border-radius: 6px;
-  font-size: 0.95rem;
-}
-
-/* Resaltar plantillas que coinciden con la búsqueda */
-.template-card.destacado {
-  background-color: #fef3c7; /* Amarillo suave */
-  border: 1px solid #facc15;
-  transform: scale(1.02);
-}
-
-template-card mark {
-  background-color: #fde68a; /* amarillo suave */
-  color: #92400e;           /* texto más oscuro para contraste */
-  padding: 0 2px;
-  border-radius: 3px;
+.item-plantilla.activa {
+  background: #2563eb;
+  color: #fff;
+  font-weight: 500;
 }

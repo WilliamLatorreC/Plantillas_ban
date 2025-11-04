@@ -26,7 +26,7 @@ mongoose.connect(MONGO_URI)
 app.use('/categorias', categoriaRoutes);
 
 // =============================
-// 🔹 ENDPOINTS CRUD DE PLANTILLAS
+//  ENDPOINTS CRUD DE PLANTILLAS
 // =============================
 
 // Crear nueva plantilla

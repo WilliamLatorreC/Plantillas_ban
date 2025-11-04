@@ -1,89 +1,137 @@
-.categoria-container {
-  max-width: 700px;
-  margin: 2rem auto;
-  padding: 2rem;
+.categoria-form {
+  max-width: 500px;
+  margin: 30px auto;
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  font-family: "Inter", sans-serif;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.categoria-container h2 {
-  color: #1e293b;
-  margin-bottom: 1.5rem;
+.categoria-form h2 {
   text-align: center;
+  color: #000;
+  margin-bottom: 20px;
 }
 
-.form-group {
-  margin-bottom: 1rem;
-}
-
-label {
+.categoria-form label {
   display: block;
+  margin-top: 15px;
   font-weight: 600;
-  color: #475569;
-  margin-bottom: 0.4rem;
+  color: #333;
 }
 
-input[type="text"],
-textarea {
+.categoria-form input,
+.categoria-form textarea {
   width: 100%;
-  padding: 0.8rem;
-  border: 1px solid #cbd5e1;
+  padding: 10px;
+  margin-top: 5px;
   border-radius: 8px;
-  outline: none;
-  font-size: 0.95rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  transition: all 0.2s ease;
 }
 
-input[type="text"]:focus,
-textarea:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+.categoria-form input:focus,
+.categoria-form textarea:focus {
+  border-color: #1976d2;
+  box-shadow: 0 0 5px rgba(25, 118, 210, 0.3);
 }
 
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-.plantillas-list {
-  max-height: 200px;
-  overflow-y: auto;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 1rem;
-  background: #f8fafc;
-}
-
-.plantilla-item {
-  margin-bottom: 0.5rem;
-  font-size: 0.95rem;
-}
-
-.btn {
-  display: block;
+button {
   width: 100%;
-  background-color: #3b82f6;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #1976d2;
   color: white;
+  font-size: 16px;
   border: none;
-  border-radius: 8px;
-  padding: 0.8rem;
-  font-size: 1rem;
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background 0.3s;
 }
 
-.btn:hover {
-  background-color: #2563eb;
+button:hover {
+  background-color: #0d47a1;
 }
 
 .mensaje {
-  margin-top: 1rem;
   text-align: center;
+  margin-top: 15px;
   font-weight: 500;
 }
 
-.mensaje:empty {
-  display: none;
+/* 🩵 Dropdown personalizado estilo select */
+.dropdown-container {
+  position: relative;
+  margin-top: 10px;
+}
+
+.dropdown-select {
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 8px;
+  padding: 10px;
+  cursor: pointer;
+  color: #0d47a1;
+  transition: background 0.2s;
+}
+
+.dropdown-select:hover {
+  background: #bbdefb;
+}
+
+.dropdown-menu {
+  position: absolute;
+  width: 100%;
+  top: 105%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  z-index: 100;
+  max-height: 250px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu input {
+  border: none;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+  outline: none;
+  background: #f5f9ff;
+}
+
+.dropdown-list {
+  overflow-y: auto;
+  flex: 1;
+  padding: 5px 0;
+}
+
+.grupo-nombre {
+  font-weight: bold;
+  background: #e3f2fd;
+  color: #0d47a1;
+  padding: 6px 10px;
+  border-left: 3px solid #1976d2;
+}
+
+.opcion {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.opcion:hover {
+  background: #e1f5fe;
+}
+
+/* Scroll personalizado */
+.dropdown-list::-webkit-scrollbar {
+  width: 6px;
+}
+.dropdown-list::-webkit-scrollbar-thumb {
+  background-color: #90caf9;
+  border-radius: 4px;
 }

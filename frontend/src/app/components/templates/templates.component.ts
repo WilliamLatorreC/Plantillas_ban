@@ -10,7 +10,13 @@ interface Plantilla {
   producto: string;
   contenido: string;
   resolucion?: string;
-  abierta?: boolean;
+}
+
+interface Categoria {
+  _id?: string;
+  nombre: string;
+  descripcion: string;
+  plantillas: string[];
 }
 
 @Component({
@@ -22,24 +28,27 @@ interface Plantilla {
 })
 export class TemplatesComponent implements OnInit {
   plantillas: Plantilla[] = [];
+  categorias: Categoria[] = [];
+  categoriasAsociadas: Categoria[] = [];
   plantillaSeleccionada: Plantilla | null = null;
-  busqueda: string = '';
 
+  busqueda: string = '';
   nombre = '';
   producto = '';
   resolucion = '';
   plantillaGenerada = '';
-  
 
   productos: string[] = [];
-  productosAbiertos: { [key: string]: boolean } = {}; // Para controlar expansión
+  productosAbiertos: { [key: string]: boolean } = {};
 
+  tabActiva: 'vista' | 'categorias' = 'vista'; // pestaña actual
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.obtenerPlantillas();
+    this.obtenerCategorias();
   }
 
   obtenerPlantillas(): void {
@@ -49,37 +58,20 @@ export class TemplatesComponent implements OnInit {
         this.productos = Array.from(new Set(res.map(p => p.producto)));
         this.productos.forEach(prod => this.productosAbiertos[prod] = false);
       },
-      error: (err) => {
-        console.error('Error al cargar plantillas', err);
-        alert('Error al cargar plantillas');
-      }
+      error: (err) => console.error('Error al cargar plantillas', err)
+    });
+  }
+
+  obtenerCategorias(): void {
+    this.http.get<Categoria[]>(`${this.apiUrl}/categorias`).subscribe({
+      next: (res) => (this.categorias = res),
+      error: (err) => console.error('Error al cargar categorías', err)
     });
   }
 
   toggleProducto(producto: string): void {
     this.productosAbiertos[producto] = !this.productosAbiertos[producto];
   }
-
-  expandirProductosPorBusqueda(): void {
-  if (!this.busqueda.trim()) {
-    // Si la búsqueda está vacía, cerramos todos los productos
-    this.productos.forEach(prod => this.productosAbiertos[prod] = false);
-    return;
-  }
-
-  // Si hay búsqueda, abrimos solo los productos que tienen coincidencias
-  this.productos.forEach(prod => {
-    const coincidencias = this.getPlantillasPorProducto(prod).length > 0 ||
-                          prod.toLowerCase().includes(this.busqueda.toLowerCase());
-    this.productosAbiertos[prod] = coincidencias;
-  });
-}
-
-resaltarCoincidencias(texto: string): string {
-  if (!this.busqueda.trim()) return texto;
-  const regex = new RegExp(`(${this.busqueda})`, 'gi');
-  return texto.replace(regex, `<mark>$1</mark>`);
-}
 
   getPlantillasPorProducto(producto: string): Plantilla[] {
     return this.plantillas
@@ -90,16 +82,42 @@ resaltarCoincidencias(texto: string): string {
       );
   }
 
+  filtrarPlantillas(): void {
+  const texto = this.busqueda.toLowerCase().trim();
+
+  if (texto === '') {
+    // Si se borra el texto, colapsar todo
+    this.productos.forEach(prod => (this.productosAbiertos[prod] = false));
+    return;
+  }
+
+  // Si se escribe algo, abrir solo los productos que tengan coincidencias
+  this.productos.forEach(prod => {
+    const coincide = this.plantillas.some(
+      p =>
+        p.producto.toLowerCase().includes(texto) ||
+        p.nombre.toLowerCase().includes(texto)
+    );
+    this.productosAbiertos[prod] = coincide;
+  });
+}
+
+
   seleccionarPlantilla(plantilla: Plantilla) {
     this.plantillaSeleccionada = plantilla;
     this.nombre = plantilla.nombre;
     this.producto = plantilla.producto;
     this.resolucion = plantilla.resolucion || '';
     this.plantillaGenerada = plantilla.contenido;
+    this.tabActiva = 'vista'; 
+
+    this.categoriasAsociadas = this.categorias.filter(cat =>
+      cat.plantillas.includes(plantilla._id || '')
+    );
   }
 
   guardarPlantilla(): void {
-    if (!this.nombre.trim() || !this.producto.trim() || !this.plantillaGenerada.trim() || !this.resolucion.trim()) {
+    if (!this.nombre.trim() || !this.producto.trim() || !this.plantillaGenerada.trim()) {
       alert('Completa todos los campos');
       return;
     }
@@ -117,15 +135,12 @@ resaltarCoincidencias(texto: string): string {
         this.obtenerPlantillas();
         this.resetFormulario();
       },
-      error: (err) => {
-        console.error('Error al guardar plantilla', err);
-        alert('Error al guardar plantilla');
-      }
+      error: (err) => console.error('Error al guardar plantilla', err)
     });
   }
 
   actualizarPlantilla(): void {
-    if (!this.plantillaSeleccionada || !this.plantillaSeleccionada._id) return;
+    if (!this.plantillaSeleccionada?._id) return;
 
     const actualizada: Plantilla = {
       nombre: this.nombre,
@@ -142,10 +157,7 @@ resaltarCoincidencias(texto: string): string {
           this.resetFormulario();
           this.plantillaSeleccionada = null;
         },
-        error: (err) => {
-          console.error('Error al actualizar plantilla', err);
-          alert('Error al actualizar plantilla');
-        }
+        error: (err) => console.error('Error al actualizar plantilla', err)
       });
   }
 
@@ -158,28 +170,19 @@ resaltarCoincidencias(texto: string): string {
         this.obtenerPlantillas();
         if (this.plantillaSeleccionada?._id === id) this.resetFormulario();
       },
-      error: (err) => {
-        console.error('Error al eliminar plantilla', err);
-        alert('Error al eliminar plantilla');
-      }
+      error: (err) => console.error('Error al eliminar plantilla', err)
     });
   }
 
   resetFormulario(): void {
     this.nombre = '';
     this.producto = '';
+    this.resolucion = '';
     this.plantillaGenerada = '';
-    this.resolucion = '',
     this.plantillaSeleccionada = null;
   }
 
-  // ===== PRODUCTOS FILTRADOS SEGÚN LA BÚSQUEDA =====
-  get productosFiltrados(): string[] {
-    if (!this.busqueda.trim()) return this.productos;
-
-    return this.productos.filter(prod => 
-      this.getPlantillasPorProducto(prod).length > 0 ||
-      prod.toLowerCase().includes(this.busqueda.toLowerCase())
-    );
+  cambiarTab(tab: 'vista' | 'categorias') {
+    this.tabActiva = tab;
   }
 }

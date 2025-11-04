@@ -1,65 +1,97 @@
-<div class="templates-container">
-  <!-- Panel izquierdo -->
-  <section class="info-panel">
-    <h2>📄 Plantillas disponibles</h2>
-    <p class="subtitle">Selecciona un producto para ver sus plantillas.</p>
+<div class="contenedor-general">
+  <!-- 📋 Panel izquierdo -->
+  <div class="panel-izquierdo">
+    <h3>📄 Plantillas disponibles</h3>
 
-    <div class="search-box">
-      <input type="text" [(ngModel)]="busqueda" placeholder="🔍 Buscar producto o plantilla..." (ngModelChange)="expandirProductosPorBusqueda()"/>
-    </div>
+    <input
+      type="text"
+      [(ngModel)]="busqueda"
+      (keyup)="filtrarPlantillas()"
+      placeholder="🔍 Buscar producto o plantilla..."
+      class="buscador"
+    />
 
-    <div class="template-list">
-      <div *ngFor="let prod of productos">
-        <div 
-          class="producto-card"
-          [class.destacado-producto]="prod.toLowerCase().includes(busqueda.toLowerCase())"
-          (click)="toggleProducto(prod)"
-        >
-          <strong>{{ prod }}</strong>
-        </div>
-        <div class="plantilla-sublist" *ngIf="productosAbiertos[prod]">
-          <div
-            class="template-card"
-            *ngFor="let plantilla of getPlantillasPorProducto(prod)"
-            (click)="seleccionarPlantilla(plantilla)"
-            [innerHTML]="resaltarCoincidencias(plantilla.nombre)"
-          >
-            {{ plantilla.nombre }}
-          </div>
+    <div *ngFor="let producto of productos">
+      <div class="producto-titulo" (click)="toggleProducto(producto)">
+        {{ producto }}
+      </div>
+
+      <div *ngIf="productosAbiertos[producto]" class="lista-plantillas">
+        <div
+          *ngFor="let plantilla of getPlantillasPorProducto(producto)"
+          (click)="seleccionarPlantilla(plantilla)"
+          [class.activa]="plantillaSeleccionada && plantillaSeleccionada._id === plantilla._id"
+          class="item-plantilla">
+          {{ plantilla.nombre }}
         </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Panel derecho -->
-  <section class="preview-panel" *ngIf="plantillaSeleccionada">
-    <h2>👁️ Vista previa</h2>
-    <div class="preview-content">
-      <div class="form-group">
-        <label>Nombre:</label>
-        <input type="text" [(ngModel)]="nombre" />
-      </div>
-      <div class="form-group">
-        <label>Producto:</label>
-        <input type="text" [(ngModel)]="producto" />
-      </div>
-      <div class="form-group">
-        <label>Contenido:</label>
-        <textarea [(ngModel)]="plantillaGenerada"></textarea>
-      </div>
-      <div class="form-group">
-        <label>Resolución Recomendada:</label>
-        <textarea [(ngModel)]="resolucion" placeholder="Resolucion del caso" ></textarea>
-      </div>
+  <!-- 📂 Panel derecho -->
+<div class="panel-derecho">
+  <div class="tabs">
+    <button 
+      [class.active]="tabActiva === 'vista'" 
+      (click)="cambiarTab('vista')">
+      👁️ Vista previa
+    </button>
+    <button 
+      [class.active]="tabActiva === 'categorias'" 
+      (click)="cambiarTab('categorias')">
+      🗂️ Categorías
+    </button>
+  </div>
+
+  <!-- 🧩 Vista previa -->
+  <div *ngIf="tabActiva === 'vista'" class="vista-previa">
+
+    <!-- Si NO hay plantilla seleccionada -->
+    <div *ngIf="!plantillaSeleccionada" class="sin-plantilla">
+      <p><strong>Seleccione una plantilla</strong> en el panel izquierdo para visualizarla o editarla.</p>
     </div>
 
-    <div class="actions">
-      <button (click)="actualizarPlantilla()">✏️ Actualizar</button>
-      <button (click)="eliminarPlantilla(plantillaSeleccionada._id)" class="delete">🗑️ Eliminar</button>
-    </div>
-  </section>
+    <!-- Si HAY plantilla seleccionada -->
+    <div *ngIf="plantillaSeleccionada" class="contenedor-vista">
+      <h3>Vista previa</h3>
 
-  <section class="empty-preview" *ngIf="!plantillaSeleccionada">
-    <p>Selecciona una plantilla para verla aquí.</p>
-  </section>
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="nombre" class="form-control" />
+
+      <label>Producto:</label>
+      <input type="text" [(ngModel)]="producto" class="form-control" />
+
+      <label>Contenido:</label>
+      <textarea rows="5" [(ngModel)]="plantillaGenerada" class="form-control"></textarea>
+
+      <label>Resolución recomendada:</label>
+      <textarea rows="3" [(ngModel)]="resolucion" class="form-control"></textarea>
+
+      <div class="botones">
+        <button (click)="actualizarPlantilla()" class="btn-azul">Actualizar</button>
+        <button (click)="eliminarPlantilla(plantillaSeleccionada?._id)" class="btn-rojo" disabled>Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🗂️ Categorías -->
+  <div *ngIf="tabActiva === 'categorias'" class="vista-categorias">
+    <h3>🗂️ Categorías disponibles</h3>
+     <!-- Si NO hay plantilla seleccionada -->
+    <div *ngIf="!plantillaSeleccionada" class="sin-categorias">
+      <p><strong>No hay categorías registradas actualmente.</strong> Las categorías se crean automáticamente al asociarlas con nuevas plantillas.</p>
+    </div>
+
+    <div *ngIf="plantillaSeleccionada && categoriasAsociadas.length === 0" class="sin-categorias">
+    📁<strong>Esta plantilla no tiene categorías asociadas.</strong> Puedes crear una nueva categoría o vincularla desde el panel de gestión.
+    </div>
+
+     <div *ngIf="categoriasAsociadas.length > 0">
+      <div *ngFor="let cat of categoriasAsociadas" class="categoria-item">
+        <h4>{{ cat.nombre }}</h4>
+        <p>{{ cat.descripcion }}</p>
+      </div>
+    </div>
+  </div>
+
 </div>

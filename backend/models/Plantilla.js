@@ -13,5 +13,5 @@ const plantillaSchema = new mongoose.Schema({
   timestamps: true 
 });
 
-const Plantilla = mongoose.model('Plantilla', plantillaSchema);
-export default Plantilla;
+export default mongoose.model('Plantilla', plantillaSchema);
+

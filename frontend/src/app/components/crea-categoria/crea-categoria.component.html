@@ -1,33 +1,40 @@
-<section class="categoria-container">
-  <h2>🗂️ Crear Categoría</h2>
+<div class="categoria-form">
+  <h2>🗂 Crear Categoría</h2>
 
-  <div class="form-group">
-    <label>Nombre de la categoría</label>
-    <input type="text" [(ngModel)]="categoria.nombre" class="form-control" />
-  </div>
+  <label>Nombre de Categoría</label>
+  <input type="text" [(ngModel)]="categoria.nombre" placeholder="Ej: Promociones 2025" />
 
-  <div class="form-group">
-    <label>Descripción</label>
-    <textarea [(ngModel)]="categoria.descripcion" class="form-control"></textarea>
-  </div>
+  <label>Descripción</label>
+  <textarea [(ngModel)]="categoria.descripcion" placeholder="Describe esta categoría..."></textarea>
 
-  <h3>📄 Selecciona plantillas</h3>
-  <div class="plantillas-list">
-    <div *ngFor="let p of plantillas" class="plantilla-item">
-      <label>
-        <input
-          type="checkbox"
-          [checked]="categoria.plantillas.includes(p._id)"
-          (change)="togglePlantilla(p._id)"
-        />
-        {{ p.nombre }} — <small>{{ p.producto }}</small>
-      </label>
+  <label>Seleccionar Plantilla</label>
+  <div class="dropdown-container">
+    <div class="dropdown-select" (click)="dropdownAbierto = !dropdownAbierto">
+      {{ plantillaSeleccionada ? plantillaSeleccionada.nombre : '🔽 Selecciona una plantilla' }}
+    </div>
+
+    <div *ngIf="dropdownAbierto" class="dropdown-menu">
+      <input
+        type="text"
+        [(ngModel)]="filtro"
+        (input)="filtrarPlantillas()"
+        placeholder="🔍 Buscar plantilla o producto..."
+      />
+      <div class="dropdown-list">
+        <div *ngFor="let grupo of plantillasAgrupadas" class="grupo">
+          <div class="grupo-nombre">{{ grupo.producto }}</div>
+          <div
+            *ngFor="let p of grupo.plantillas"
+            class="opcion"
+            (click)="seleccionarPlantilla(p)"
+          >
+            {{ p.nombre }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <button (click)="guardarCategoria()" class="btn btn-primary mt-3">
-    Guardar Categoría
-  </button>
-
+  <button (click)="guardarCategoria()">💾 Guardar Categoría</button>
   <p class="mensaje">{{ mensaje }}</p>
-</section>
+</div>
