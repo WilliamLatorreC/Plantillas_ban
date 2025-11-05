@@ -12,7 +12,7 @@ import { PlantillaService } from '../../services/plantilla.service';
   styleUrls: ['./crea-categoria.component.css']
 })
 export class CreaCategoriaComponent implements OnInit {
-  categoria = { nombre: '', descripcion: '', plantillaId: '' };
+  categoria = { nombre: '', descripcion: '', tipo: '', plantillaId: '' };
   plantillas: any[] = [];
   plantillasAgrupadas: { producto: string; plantillas: any[] }[] = [];
   mensaje: string = '';
@@ -74,7 +74,7 @@ export class CreaCategoriaComponent implements OnInit {
     this.categoriaService.crearCategoria(this.categoria).subscribe({
       next: () => {
         this.mensaje = '✅ Categoría creada correctamente';
-        this.categoria = { nombre: '', descripcion: '', plantillaId: '' };
+        this.categoria = { nombre: '', descripcion: '', tipo: '', plantillaId: '' };
         this.plantillaSeleccionada = null;
         this.filtro = '';
       },

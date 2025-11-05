@@ -14,6 +14,7 @@ interface Plantilla {
 
 interface Categoria {
   _id?: string;
+  tipo: string;
   nombre: string;
   descripcion: string;
   plantillas: string[];
@@ -41,7 +42,7 @@ export class TemplatesComponent implements OnInit {
   productos: string[] = [];
   productosAbiertos: { [key: string]: boolean } = {};
 
-  tabActiva: 'vista' | 'categorias' = 'vista'; // pestaña actual
+  tabActiva: 'vista' | 'categorias' = 'vista'; 
   private apiUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
@@ -104,17 +105,27 @@ export class TemplatesComponent implements OnInit {
 
 
   seleccionarPlantilla(plantilla: Plantilla) {
-    this.plantillaSeleccionada = plantilla;
-    this.nombre = plantilla.nombre;
-    this.producto = plantilla.producto;
-    this.resolucion = plantilla.resolucion || '';
-    this.plantillaGenerada = plantilla.contenido;
-    this.tabActiva = 'vista'; 
+  this.plantillaSeleccionada = plantilla;
+  this.nombre = plantilla.nombre;
+  this.producto = plantilla.producto;
+  this.resolucion = plantilla.resolucion || '';
+  this.plantillaGenerada = plantilla.contenido;
+  this.tabActiva = 'vista';
 
-    this.categoriasAsociadas = this.categorias.filter(cat =>
-      cat.plantillas.includes(plantilla._id || '')
+  // Filtra las categorías asociadas a esta plantilla
+  this.categoriasAsociadas = this.categorias.filter(cat => {
+    const plantillas = cat.plantillas || []; // Evita undefined
+    // Si tu backend usa plantillaId (no plantillas)
+    const plantillaId = (cat as any).plantillaId?._id || (cat as any).plantillaId;
+
+    // Retorna true si coincide con la plantilla seleccionada
+    return (
+      (Array.isArray(plantillas) && plantillas.includes(plantilla._id || '')) ||
+      (plantillaId && plantillaId.toString() === (plantilla._id || '').toString())
     );
-  }
+  });
+}
+
 
   guardarPlantilla(): void {
     if (!this.nombre.trim() || !this.producto.trim() || !this.plantillaGenerada.trim()) {

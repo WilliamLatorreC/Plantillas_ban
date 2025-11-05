@@ -88,8 +88,9 @@
 
      <div *ngIf="categoriasAsociadas.length > 0">
       <div *ngFor="let cat of categoriasAsociadas" class="categoria-item">
-        <h4>{{ cat.nombre }}</h4>
-        <p>{{ cat.descripcion }}</p>
+        <h4>Tipo: {{ cat.tipo }}</h4>
+        <p>Servicio: {{ cat.nombre }}</p>
+        <p>Categoria: {{ cat.descripcion }}</p>
       </div>
     </div>
   </div>

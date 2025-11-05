@@ -135,3 +135,84 @@ button:hover {
   background-color: #90caf9;
   border-radius: 4px;
 }
+
+/*================*/
+
+/* Contenedor del campo */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+/* Etiqueta */
+.form-group label {
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 6px;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+
+/* Select estilizado */
+.form-group select {
+  appearance: none; /* Quita estilo nativo del navegador */
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 10px 40px 10px 14px;
+  font-size: 15px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Icono de flecha personalizada */
+.form-group::after {
+  content: "▼";
+  position: absolute;
+  right: 14px;
+  top: 51px;
+  font-size: 12px;
+  color: #888;
+  pointer-events: none;
+}
+
+/* Efecto al enfocar */
+.form-group select:focus {
+  border-color: #7b4bff; /* color morado suave */
+  box-shadow: 0 0 6px rgba(123, 75, 255, 0.4);
+  outline: none;
+  transform: scale(1.01);
+}
+
+/* Animación tipo "proceso" al seleccionar */
+@keyframes selectPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(123, 75, 255, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(123, 75, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(123, 75, 255, 0);
+  }
+}
+
+/* Aplica la animación cuando cambia */
+.form-group select:focus {
+  animation: selectPulse 1s ease;
+}
+
+/* Estado inválido */
+.form-group select:invalid {
+  border-color: #e74c3c;
+  background-color: #fff5f5;
+}
+
+/* Hover */
+.form-group select:hover {
+  border-color: #9a76ff;
+}

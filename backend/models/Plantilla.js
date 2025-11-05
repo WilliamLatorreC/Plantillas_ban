@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const plantillaSchema = new mongoose.Schema({
   nombre: { type: String, required: true },

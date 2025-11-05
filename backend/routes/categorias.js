@@ -1,6 +1,7 @@
 import express from "express";
 import Categoria from "../models/Categoria.js";
 import "../models/Plantilla.js";
+import mongoose, { Types } from "mongoose";
 
 const router = express.Router();
 
@@ -8,7 +9,7 @@ const router = express.Router();
 router.get("/", async (req, res) => {
   try {
     const categorias = await Categoria.find()
-      .populate("plantillaId", "nombre");
+      .populate("plantillaId", "nombre producto");
     res.json(categorias);
   } catch (error) {
     console.error("❌ Error detallado al obtener categorías:", error);
@@ -19,19 +20,23 @@ router.get("/", async (req, res) => {
 // 🔹 Crear nueva categoría
 router.post("/", async (req, res) => {
   try {
-    const { nombre, descripcion, plantillaId } = req.body;
+    const { nombre, descripcion, tipo, plantillaId } = req.body;
 
     if (!plantillaId) {
-      return res.status(400).json({ error: "Debe seleccionar una plantilla válida" });
+      return res.status(400).json({ error: "El campo plantillaId es obligatorio" });
     }
 
-    // Validar que la plantilla exista
-    const plantillaExiste = await mongoose.model('Plantilla').findById(plantillaId);
-    if (!plantillaExiste) {
-      return res.status(400).json({ error: "La plantilla seleccionada no existe" });
+    if (!tipo || !["Requerimiento", "Incidencia"].includes(tipo)) {
+      return res.status(400).json({ error: "El campo tipo debe ser 'Requerimiento' o 'Incidencia'" });
     }
 
-    const nuevaCategoria = new Categoria({ nombre, descripcion, plantillaId });
+    const nuevaCategoria = new Categoria({
+      nombre,
+      descripcion,
+      tipo,
+      plantillaId: new Types.ObjectId(plantillaId),
+    });
+
     await nuevaCategoria.save();
     res.json(nuevaCategoria);
   } catch (error) {

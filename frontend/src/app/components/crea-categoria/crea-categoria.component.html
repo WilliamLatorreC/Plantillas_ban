@@ -1,6 +1,15 @@
 <div class="categoria-form">
   <h2>🗂 Crear Categoría</h2>
 
+  <div class="form-group">
+    <label for="tipo">Tipo:</label>
+    <select id="tipo" [(ngModel)]="categoria.tipo" class="form-control" required>
+      <option value="">Seleccione un tipo</option>
+      <option value="Requerimiento">Requerimiento</option>
+      <option value="Incidencia">Incidencia</option>
+    </select>
+  </div>
+
   <label>Nombre de Categoría</label>
   <input type="text" [(ngModel)]="categoria.nombre" placeholder="Ej: Promociones 2025" />
 
@@ -36,5 +45,5 @@
   </div>
 
   <button (click)="guardarCategoria()">💾 Guardar Categoría</button>
-  <p class="mensaje">{{ mensaje }}</p>
+  <p class="mensaje">{{ mensaje }}</p>  
 </div>
