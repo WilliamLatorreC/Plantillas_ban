@@ -27,6 +27,10 @@ router.post('/', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Error al crear categoría' });
   }
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/tu-app/index.html'));
+  });
 });
 
 module.exports = router;

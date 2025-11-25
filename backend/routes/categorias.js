@@ -1,5 +1,6 @@
 import express from "express";
 import Categoria from "../models/Categoria.js";
+import { verifyToken } from "../Middlewares/authMiddleware.js";
 import "../models/Plantilla.js";
 import mongoose, { Types } from "mongoose";
 
@@ -18,7 +19,7 @@ router.get("/", async (req, res) => {
 });
 
 // 🔹 Crear nueva categoría
-router.post("/", async (req, res) => {
+router.post("/", verifyToken, async (req, res) => {
   try {
     const { nombre, descripcion, tipo, plantillaId } = req.body;
 
@@ -43,6 +44,10 @@ router.post("/", async (req, res) => {
     console.error("❌ Error al crear categoría:", error);
     res.status(500).json({ error: "Error al crear la categoría" });
   }
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dist/tu-app/index.html'));
+  });
 });
 
 export default router;

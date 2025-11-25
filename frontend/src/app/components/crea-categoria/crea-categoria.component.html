@@ -11,12 +11,12 @@
   </div>
 
   <label>Nombre de Categoría</label>
-  <input type="text" [(ngModel)]="categoria.nombre" placeholder="Ej: Promociones 2025" />
+  <input type="text" [(ngModel)]="categoria.nombre" placeholder="Ej: Bizagi Libranza" />
 
-  <label>Descripción</label>
-  <textarea [(ngModel)]="categoria.descripcion" placeholder="Describe esta categoría..."></textarea>
+  <label>Servicio:</label>
+  <textarea [(ngModel)]="categoria.descripcion" placeholder="Indica el servicio..."></textarea>
 
-  <label>Seleccionar Plantilla</label>
+  <label>Seleccionar Plantilla a Asociar</label>
   <div class="dropdown-container">
     <div class="dropdown-select" (click)="dropdownAbierto = !dropdownAbierto">
       {{ plantillaSeleccionada ? plantillaSeleccionada.nombre : '🔽 Selecciona una plantilla' }}
