@@ -2,9 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
-import Plantilla from './models/Plantilla.js';
-import categoriaRoutes from './routes/categorias.js';
-import authRoutes from "./routes/auth.js";
+
 
 const app = express();
 
@@ -17,20 +15,18 @@ const allowedOrigins = [
 ];
 
 app.use(cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("No permitido por CORS"));
-    }
-  },
-  methods: "GET,POST,PUT,DELETE",
-  allowedHeaders: "Content-Type, Authorization",
+  origin: ["http://localhost:4200", "https://plantillas-ban-1.onrender.com"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
 // Manejar preflight OPTIONS correctamente
 app.options('*', cors());
+
+import Plantilla from './models/Plantilla.js';
+import categoriaRoutes from './routes/categorias.js';
+import authRoutes from "./routes/auth.js";
 
 app.use(bodyParser.json());
 
@@ -49,6 +45,10 @@ mongoose.connect(MONGO_URI)
 
 // Login primero (IMPORTANTE)
 app.use("/api/auth", authRoutes);
+
+app.get("/cors-test", (req, res) => {
+  res.json({ message: "cors ok" });
+});
 
 // Categorías
 app.use('/categorias', categoriaRoutes);
