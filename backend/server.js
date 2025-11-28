@@ -20,7 +20,8 @@ app.use(helmet());
 app.use(cors({
   origin: [
     "http://localhost:4200",
-    "https://plantillas-ban-1.onrender.com"
+    "https://plantillas-ban-1.onrender.com",
+    "https://plantillas-ban.onrender.com"
   ],
   methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
