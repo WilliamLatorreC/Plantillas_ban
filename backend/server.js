@@ -2,58 +2,57 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import dotenv from "dotenv";
+import categoriaRoutes from './routes/categorias.js';
+import authRoutes from "./routes/auth.routes.js";
+import Plantilla from './models/Plantilla.js';
 
+dotenv.config();
 
 const app = express();
 
 // ===========================
-// 1. CONFIGURAR CORS CORRECTO
+// 1. CONFIGURAR CORS
 // ===========================
-const allowedOrigins = [
-  "http://localhost:4200",
-  "https://plantillas-ban-1.onrender.com"
-];
-
 app.use(cors({
-  origin: ["http://localhost:4200", "https://plantillas-ban-1.onrender.com"],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  origin: [
+    "http://localhost:4200",
+    "https://plantillas-ban-1.onrender.com"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }));
 
-// Manejar preflight OPTIONS correctamente
-app.options('*', cors());
-
-import Plantilla from './models/Plantilla.js';
-import categoriaRoutes from './routes/categorias.js';
-import authRoutes from "./routes/auth.js";
-
+app.use(express.json());
 app.use(bodyParser.json());
 
 // ===========================
-// 2. CONEXIÓN A MONGO
+// 2. CONEXIÓN MONGO
 // ===========================
-const MONGO_URI = "mongodb+srv://andresroot:andres2003@cluster0.dw4y432.mongodb.net/plantillas_db?retryWrites=true&w=majority";
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 10000
+})
+.then(() => console.log("MongoDB conectado"))
+.catch(err => console.error("Error al conectar MongoDB:", err));
 
-mongoose.connect(MONGO_URI)
-  .then(() => console.log("✅ Conectado a MongoDB Atlas"))
-  .catch(err => console.error("❌ Error de conexión a MongoDB:", err));
+// Manejar preflight OPTIONS
+app.options('*', cors());
 
 // ===========================
-// 3. RUTAS
+// 3. RUTAS IMPORTADAS
 // ===========================
 
-// Login primero (IMPORTANTE)
+
+// Rutas de autenticación
 app.use("/api/auth", authRoutes);
 
-app.get("/cors-test", (req, res) => {
-  res.json({ message: "cors ok" });
-});
-
-// Categorías
+// Rutas de categorías
 app.use('/categorias', categoriaRoutes);
 
-// CRUD Plantillas
+// ===========================
+// CRUD de plantillas
+// ===========================
+
 app.post('/plantillas', async (req, res) => {
   try {
     const nueva = new Plantilla(req.body);
@@ -97,7 +96,5 @@ app.get('/', (req, res) => {
 });
 
 // ===========================
-// 4. INICIAR SERVIDOR
-// ===========================
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Servidor backend en puerto ${PORT}`));
+app.listen(PORT, () => console.log(`Servidor en puerto ${PORT}`));

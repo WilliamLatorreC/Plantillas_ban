@@ -1,34 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { HttpClient } from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs/internal/Observable";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private apiUrl = "https://plantillas-ban-1.onrender.com/api/auth";
+  private url = "http://localhost:3000/api/auth";
+  //private api = 'https://plantillas-ban-back.onrender.com/api/auth';
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
-  login(correo: string, contrasena: string) {
-    return this.http.post(`${this.apiUrl}/login`, { correo, contrasena });
-  }
-
-  guardarToken(token: string) {
-    localStorage.setItem("token", token);
-  }
-
-  getToken() {
-    return localStorage.getItem("token");
-  }
+  login(data: any): Observable<any> {
+    return this.http.post(`${this.url}/login`, data);
+  } 
 
   logout() {
-    localStorage.removeItem("token");
-    this.router.navigate(['/login']);
+    localStorage.removeItem('token'); 
   }
-
-  estaAutenticado(): boolean {
-    return !!localStorage.getItem("token");
-  }
-}
+} 

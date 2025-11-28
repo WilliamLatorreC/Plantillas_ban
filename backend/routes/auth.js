@@ -1,43 +1,55 @@
 import express from "express";
 import Usuario from "../models/Usuario.js";
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
+// ✔ Crear usuario admin SOLO una vez
+router.get("/crear-admin", async (req, res) => {
   try {
-    const { correo, contraseña } = req.body;
+    const existe = await Usuario.findOne({ correo: "admin@ban100.com.co" });
 
-    // ⛔ Validar dominio permitido
-    if (!correo.endsWith("@ban100.com.co")) {
-      return res.status(401).json({ message: "Correo no permitido" });
+    if (existe) {
+      return res.json({ message: "El admin ya existe" });
     }
 
-    const usuario = await Usuario.findOne({ correo });
+    const pass = await bcrypt.hash("admin123", 10);
 
-    if (!usuario) {
-      return res.status(401).json({ message: "El usuario no existe" });
-    }
+    await Usuario.create({
+      correo: "admin@ban100.com.co",
+      contrasena: pass
+    });
 
-    // Validar contraseña
-    const validarPass = await bcrypt.compare(contraseña, usuario.contraseña);
-    if (!validarPass) {
-      return res.status(401).json({ message: "Contraseña incorrecta" });
-    }
-
-    // Crear token
-    const token = jwt.sign(
-      { id: usuario._id, correo: usuario.correo },
-      process.env.JWT_SECRET,
-      { expiresIn: "8h" }
-    );
-
-    res.json({ token });
+    res.json({ message: "Admin creado correctamente" });
 
   } catch (error) {
+    console.error("❌ ERROR CREANDO ADMIN:", error);
+    res.status(500).json({ message: "Error al crear admin" });
+  }
+});
+
+// ✔ LOGIN
+router.post("/login", async (req, res) => {
+  try {
+    const { correo, contrasena } = req.body;
+
+    const usuario = await Usuario.findOne({ correo });
+    if (!usuario) {
+      return res.status(400).json({ message: "Usuario no encontrado" });
+    }
+
+    if (usuario.contrasena !== contrasena) {
+      return res.status(400).json({ message: "Contraseña incorrecta" });
+    }
+
+    res.json({
+      message: "Login correcto",
+      token: "TOKEN_DE_EJEMPLO"
+    });
+  } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Error interno del servidor" });
+    res.status(500).json({ message: "Error en login" });
   }
 });
 

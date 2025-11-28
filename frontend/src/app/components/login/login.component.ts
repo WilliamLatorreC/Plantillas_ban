@@ -1,32 +1,40 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  styleUrls: ['./login.component.css'],
+  imports: [
+    FormsModule,      // <-- AGREGAR AQUÍ
+    HttpClientModule
+  ]
 })
 export class LoginComponent {
 
-  correo = "";
-  contrasena = "";
-  error = "";
+  correo = '';
+  contrasena = '';
+  error: string = '';
+  
+  constructor(private authService: AuthService, private router: Router) {}
 
-  constructor(private auth: AuthService, private router: Router) {}
+  login() {
+    const data = {
+      correo: this.correo,
+      contrasena: this.contrasena
+    };
 
-  ingresar() {
-    this.auth.login(this.correo, this.contrasena).subscribe({
-      next: (res: any) => {
-        this.auth.guardarToken(res.token);
-        this.router.navigate(["/"]);
+    this.authService.login(data).subscribe({
+      next: (resp: any) => {
+        localStorage.setItem('token', resp.token);  
+        this.router.navigate(['/plantillas']);        
       },
-      error: () => {
-        this.error = "Correo o contraseña incorrectos";
+      error: (err) => {
+        console.error(err);
+        this.error = err.error?.message || "Error inesperado";
       }
     });
   }
