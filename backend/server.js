@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import dotenv from "dotenv";
 import categoriaRoutes from './routes/categorias.js';
-import authRoutes from "./routes/auth.routes.js";
+import authRoutes from "./routes/auth.js";
 import Plantilla from './models/Plantilla.js';
 
 dotenv.config();
