@@ -6,7 +6,7 @@ import { Observable } from "rxjs/internal/Observable";
 export class AuthService {
 
   //private url = "http://localhost:3000/api/auth";
-  private url = 'https://plantillas-ban-back.onrender.com/api/auth';
+  private url = 'https://plantillas-ban.onrender.com/api/auth';
 
   constructor(private http: HttpClient) {}
 
