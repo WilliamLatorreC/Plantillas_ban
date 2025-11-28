@@ -2,7 +2,6 @@ import express from "express";
 import Usuario from "../models/Usuario.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { verifyToken } from "../Middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -31,7 +30,7 @@ router.get("/crear-admin", async (req, res) => {
 });
 
 // ✔ LOGIN
-router.post("/login", verifyToken, async (req, res) => {
+router.post("/login", async (req, res) => {
   try {
     const { correo, contrasena } = req.body;
 
@@ -40,18 +39,28 @@ router.post("/login", verifyToken, async (req, res) => {
       return res.status(400).json({ message: "Usuario no encontrado" });
     }
 
-    if (usuario.contrasena !== contrasena) {
+    const passwordMatch = await bcrypt.compare(contrasena, usuario.contrasena);
+
+    if (!passwordMatch) {
       return res.status(400).json({ message: "Contraseña incorrecta" });
     }
 
+    const token = jwt.sign(
+      { id: usuario._id },
+      process.env.JWT_SECRET || "secret123",
+      { expiresIn: "7d" }
+    );
+
     res.json({
       message: "Login correcto",
-      token: "TOKEN_DE_EJEMPLO"
+      token
     });
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error en login" });
   }
 });
+
 
 export default router;

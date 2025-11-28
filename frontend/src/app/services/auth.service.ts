@@ -5,8 +5,8 @@ import { Observable } from "rxjs/internal/Observable";
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  //private url = "http://localhost:3000/api/auth";
-  private url = 'https://plantillas-ban-back.onrender.com/api/auth';
+  private url = "http://localhost:3000/api/auth";
+  //private url = 'https://plantillas-ban-back.onrender.com/api/auth';
 
   constructor(private http: HttpClient) {}
 

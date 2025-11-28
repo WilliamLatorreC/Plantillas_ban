@@ -52,7 +52,8 @@ const loginLimiter = rateLimit({
 });
 
 // Rutas de autenticación
-app.use("/api/auth", authRoutes, loginLimiter);
+app.use("/api/auth", authRoutes);
+app.use("/api/auth/login", loginLimiter); 
 
 // Rutas de categorías
 app.use('/categorias', categoriaRoutes);
