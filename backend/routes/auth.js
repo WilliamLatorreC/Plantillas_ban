@@ -2,6 +2,7 @@ import express from "express";
 import Usuario from "../models/Usuario.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { verifyToken } from "../Middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -30,7 +31,7 @@ router.get("/crear-admin", async (req, res) => {
 });
 
 // ✔ LOGIN
-router.post("/login", async (req, res) => {
+router.post("/login", verifyToken, async (req, res) => {
   try {
     const { correo, contrasena } = req.body;
 

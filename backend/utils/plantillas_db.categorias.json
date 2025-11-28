@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "690cf8141fcbad078b796d42"
+  },
+  "nombre": "Vinculacion Digital Libranza",
+  "descripcion": "Aplicaciones de negocio/Vinculacion Digital Libranza - Cambio Fuerza Comercial",
+  "tipo": "Requerimiento",
+  "plantillaId": {
+    "$oid": "690cf6ab69c2f78a48ee5b71"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692382d5c8f9b01bea11f872"
+  },
+  "nombre": "Bizagi Libranza",
+  "descripcion": "Gestion de accesos/Bizagi Libranza - Desbloqueo de Cuenta Bizagi",
+  "tipo": "Requerimiento",
+  "plantillaId": {
+    "$oid": "68f64a4302dbabf9657616f6"
+  },
+  "__v": 0
+}]

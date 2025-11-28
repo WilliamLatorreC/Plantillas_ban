@@ -7,7 +7,7 @@ import mongoose, { Types } from "mongoose";
 const router = express.Router();
 
 // 🔹 Obtener todas las categorías
-router.get("/", async (req, res) => {
+router.get("/", verifyToken, async (req, res) => {
   try {
     const categorias = await Categoria.find()
       .populate("plantillaId", "nombre producto");

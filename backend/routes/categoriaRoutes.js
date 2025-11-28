@@ -4,7 +4,7 @@ import Categoria from "../models/Categoria.js";
 const router = express.Router();
 
 // Obtener todas las categorías
-router.get("/", async (req, res) => {
+router.get("/",verificarToken, async (req, res) => {
   try {
     const categorias = await Categoria.find().populate("plantilla");
     res.json(categorias);
@@ -14,7 +14,7 @@ router.get("/", async (req, res) => {
 });
 
 // Crear nueva categoría
-router.post("/", async (req, res) => {
+router.post("/", verificarToken, async (req, res) => {
   try {
     const nuevaCategoria = new Categoria(req.body);
     await nuevaCategoria.save();

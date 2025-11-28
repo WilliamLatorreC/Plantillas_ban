@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth.service';
       <button class="btn" (click)="ir('/')">Inicio</button>
       <button class="btn btn-secondary" (click)="ir('/crear-plantilla')">Crear Plantilla</button>
       <button class="btn btn-secondary" (click)="ir('/categorias')">Crear categorias</button>
-      <button (click)="cerrarSesion()" class="btn-salir">
+      <button (click)="cerrarSesion()" class="btn btn-secondary btn-salir">
         Cerrar sesión
       </button>
     </div>

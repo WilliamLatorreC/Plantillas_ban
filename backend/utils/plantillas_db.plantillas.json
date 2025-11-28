@@ -1,0 +1,320 @@
+[{
+  "_id": {
+    "$oid": "68f64a4302dbabf9657616f6"
+  },
+  "nombre": "Desbloqueo de usuario Bizagi",
+  "producto": "Bizagi",
+  "contenido": "Buen dia.\n\nEl usuario reporta que no puede acceder a su cuenta de Bizagi, ya que el sistema indica que se encuentra bloqueada.\n\nDatos del usuario:\nNombre:\nUsuario:",
+  "createdAt": {
+    "$date": "2025-10-20T14:42:11.562Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:26:08.772Z"
+  },
+  "__v": 0,
+  "resolucion": "Se procede con el desbloqueo del usuario en el aplicativo. Posteriormente, el usuario confirma que puede acceder correctamente a su cuenta.",
+  "tipo": "Cliente\n"
+},
+{
+  "_id": {
+    "$oid": "68f65775f3ecd6ca09051bb8"
+  },
+  "nombre": "Lentitud - Equipo",
+  "producto": "Portatil",
+  "contenido": "Se realiza validaciones primer nivel, eliminando temporales del equipo reinició y validación de aplicaciones ",
+  "createdAt": {
+    "$date": "2025-10-20T15:38:29.788Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-19T13:44:05.819Z"
+  },
+  "__v": 0,
+  "resolucion": ""
+},
+{
+  "_id": {
+    "$oid": "68f65db8b90c80c7af7e4531"
+  },
+  "nombre": "Desbloqueo de usuario de red",
+  "producto": "Usuario de red",
+  "contenido": "Buen dia.\n\nEl usuario se comunica indicando que no puede ingresar a su equipo ya que cuenta con su usuario de red bloqueado.\n\nNombre:\nUsuario:",
+  "createdAt": {
+    "$date": "2025-10-20T16:05:12.825Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-18T15:07:13.240Z"
+  },
+  "__v": 0,
+  "resolucion": "Se procede con el desbloqueo del usuario en el AD. Posteriormente, el usuario confirma que puede acceder correctamente a su cuenta."
+},
+{
+  "_id": {
+    "$oid": "68f65e07b90c80c7af7e4534"
+  },
+  "nombre": "Informativo vinculación",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nEl usuario se comunica indicando que esta teniendo problemas con vinculacion digital:\n\nUsuario que reporta:\nCliente:",
+  "createdAt": {
+    "$date": "2025-10-20T16:06:31.054Z"
+  },
+  "updatedAt": {
+    "$date": "2025-10-20T16:06:31.054Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68f65e6eb90c80c7af7e4537"
+  },
+  "nombre": "Restablecimiento de clave - Bizagi",
+  "producto": "Bizagi",
+  "contenido": "Buen dia.\n\nUsuario se comunica con la mesa de servicios Sarita solicitando el restablecimiento de su contraseña en Bizagi.\n\nUsuario:",
+  "createdAt": {
+    "$date": "2025-10-20T16:08:14.054Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:26:18.781Z"
+  },
+  "__v": 0,
+  "resolucion": "Solución: Se realiza la validación correspondiente y se procede con el cambio de clave. Las nuevas credenciales de ingreso se envían al correo electrónico del usuario. Posteriormente, el usuario realiza pruebas de acceso y confirma que el ingreso fue satisfactorio. "
+},
+{
+  "_id": {
+    "$oid": "68f69c37cf4f9f35a864979e"
+  },
+  "nombre": "Link de aceptación/OTPs",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nEl usuario reporta que el cliente no recibe el código OTP. Se realizaron las siguientes validaciones:\n\n✅ Se confirma con el Usuario que la señal del dispositivo del cliente es estable.\n\n✅ Se verifica que el mensaje no se encuentre en la carpeta de spam/bloqueados/No deseados.\n\n✅ Cliente en zona: \n\n✅ Cliente conectado a : wifi_ o datos_\n\n✅ Se confirma que el cliente no utiliza más de una SIM card en el dispositivo.\n\n✅ Se valida el número del cliente en el sistema de reporting.\n\n✅ Se confirma que el número de WhatsApp coincide con el número al que se envía el OTP.\n\n✅ Se realiza una prueba de envío de mensaje de texto desde el dispositivo del asesor, comprobando que los mensajes normales llegan correctamente.\n\n⚠️ Sin embargo, los mensajes con el código OTP no son recibidos por el cliente, segun todo lo anteriormente indicado por el usuario.\n\nDatos Usuario:\n\nNombre:\nUsuario:\nTelefono:\ncorreo:\n\nDatos cliente:\n\nNombre:\nCC:\nTelefono:",
+  "createdAt": {
+    "$date": "2025-10-20T20:31:51.400Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:29:12.000Z"
+  },
+  "__v": 0,
+  "resolucion": "Hallazgo: No llegan los códigos de validación \nCausa : El dispositivo móvil no tiene señal de red suficiente para recibir mensajes SMS o WhatsApp\nSolución: se realiza la validación y se procede a indicarle al usuario tratar de iniciar el borrado de cache y datos de navegación, posteriormente se indica revisar la configuración en mensajería de texto con el fin de establecer si es problema del dispositivo o parte del operador "
+},
+{
+  "_id": {
+    "$oid": "68f69c7fcf4f9f35a86497a1"
+  },
+  "nombre": "Avance de caso",
+  "producto": "Bizagi",
+  "contenido": "Buen dia.\n\nUsuario se comunica con la mesa de servicio solicitando el avance del caso ya que se encuentra en bandeja [...]\n\nCaso Bizagi:\nCedula del cliente: ",
+  "createdAt": {
+    "$date": "2025-10-20T20:33:03.787Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-20T17:39:06.447Z"
+  },
+  "__v": 0,
+  "resolucion": ""
+},
+{
+  "_id": {
+    "$oid": "68f6b2666ef17fdd6d59ff9d"
+  },
+  "nombre": "Desbloqueo de usuario SIIF-CF",
+  "producto": "SIIF",
+  "contenido": "Buen dia.\n\nUsuario se comunica con la mesa de servicios solicitando el desbloqueo de cuenta en SIIF CF\n\nNombre:\nUsuario: ",
+  "createdAt": {
+    "$date": "2025-10-20T22:06:30.877Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-18T14:27:15.489Z"
+  },
+  "__v": 0,
+  "resolucion": "Se realiza la validación de la cuenta y después recibir el visto Bueno se procede a realizar el desbloqueo permitiendo al usuario ingresar de manera exitosa \n\n\n**Nota: Tener presente en ingresar en el apartado de contraseña con el mismo usuario, luego solicitara cambio de contraseña, esta debe ser alfa numérica con una mayúscula y dos números. NO DEBE LLEVAR CARACTERES ESPECIALES NI SER UNA CONTRASEÑA USADA ANTERIORMENTE, Ejemplo; Colombia25"
+},
+{
+  "_id": {
+    "$oid": "68ffa017408c32a37296a237"
+  },
+  "nombre": "Error de Perfilamiento ",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nUsuario se comunica con la mesa de servicio sarita indicando que al realizar el proceso de perfilamiento el sistema lo alerta de un error en el servicio de perfilamiento lo que le impide realizar el avance del proceso de cara al cliente\n\n\nReporta:\n\nNombre cliente:\nCC cliente:",
+  "resolucion": "Hallazgo: Se detectó un error en el servicio de perfilamiento. \nCausa: Problemas relacionados con la caché. \nSolución: \n1. Se realiza la validación correspondiente. \n2. Se sugiere al usuario llevar a cabo los siguientes pasos: \n• Borrar la caché como primera instancia. \n• En caso de que el problema persista, reiniciar el dispositivo móvil.\n3. Posteriormente, ingresar a la plataforma de vinculación utilizando el navegador en modo incógnito. \n4. Reenviar el enlace correspondiente para que el usuario pueda realizar nuevamente el proceso de vinculación\n",
+  "createdAt": {
+    "$date": "2025-10-27T16:38:47.008Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:29:48.775Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68ffb1e65603d3bfb33e9c8d"
+  },
+  "nombre": "Envios Credenciales Correo",
+  "producto": "Correo - envio credenciales",
+  "contenido": "Buen día,\n\nSe realiza el envío de las credenciales de los aplicativos [...].\nPor favor, valida el acceso y, en caso de presentar alguna novedad, comunícate con la línea de mesa de servicio Sarita o responde directamente a este correo.\n\nNota: El archivo adjunto está protegido; para desbloquearlo utiliza el número de documento de identidad (CC) del usuario [Nombre usuario]",
+  "resolucion": " ",
+  "createdAt": {
+    "$date": "2025-10-27T17:54:46.479Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:24:47.253Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6900f1d759e99d5fba4fc7e6"
+  },
+  "nombre": "Error de validacion de identidad",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nusuario se comunica con la Mesa de Servicio Sarita para informar que, al realizar el proceso de validación de identidad, el sistema muestra una alerta de error indicando que no se puede detectar el rostro del cliente al intentar abrir la cámara del dispositivo, lo que impide completar el proceso de validación.\n\nReporta:\n\nNombre cliente:\nCc cliente",
+  "resolucion": "Validación del funcionamiento físico de la cámara.\n\nRevisión de configuración de privacidad del sistema operativo (Configuración > Privacidad > Cámara) y habilitación del acceso para la aplicación de validación.\n\nLimpieza de caché y reinicio de la aplicación.\n\nPrueba funcional del proceso de validación junto al usuario.\n\nTras habilitar los permisos de acceso y reiniciar la aplicación, la cámara detectó correctamente el rostro del cliente.\nEl proceso de validación de identidad se completó de forma exitosa sin mostrar alertas de error.\nEl usuario confirmó la normalización del servicio.",
+  "createdAt": {
+    "$date": "2025-10-28T16:39:51.275Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:30:23.476Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6900f37959e99d5fba4fc7e8"
+  },
+  "nombre": "Error de validacion de identidad / Bloqueo de cliente ",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nusuario se comunica con la Mesa de Servicio Sarita para informar que, al realizar el proceso de validación de identidad, el sistema muestra una alerta de error indicando que el usuario se encuentra Bloqueado\n\nReporta:\n\nNombre cliente:\nCc cliente",
+  "resolucion": "Tras realizar la validation dentro de la aplicación el sistema nuestro una traza de registro de proceso realizados con el cliente una fecha específica del suceso de bloqueo lo cual se informa al usuario y se recomienda realizar la solicitud de desbloqueo del cliente mediante un correo electrónico dirigido al area de seguridad Bancaria con el señor Gustavo Cardozo",
+  "createdAt": {
+    "$date": "2025-10-28T16:46:49.381Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:30:48.880Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69011f1721e322f295f0c974"
+  },
+  "nombre": "Error de validacion de identidad / Captura errada",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nusuario se comunica con la Mesa de Servicio Sarita para informar que, al realizar el proceso de validación de identidad, el sistema muestra una alerta de error indicando que la captura de imagen es errada por parte del cliente \n\nReporta:\n\nNombre cliente:\nCc cliente",
+  "resolucion": "tras la validación dentro de la aplicación se identifica que las tomas generadas por parta del cliente no se están generando de manera adecuada dado que no son clara y están fuera del recuadro que indica el sistema or lo que se indica al usuario realizar nuevamente el proceso de validación e instruir al cliente para que realice el proceso teniendo en cuenta los requerimientos del sistema para permitir el avance dentro del proceso, usuario realiza nuevamente el proceso y confirma avance de manera satisfactoria",
+  "createdAt": {
+    "$date": "2025-10-28T19:52:55.055Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:31:01.971Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "69027c6473892e9e94df0f4b"
+  },
+  "nombre": "Restablecimiento de clave / SIIF CF",
+  "producto": "SIIF",
+  "contenido": "Buen dia.\n\nusuario se comunica con la mesa de ayuda solicitando el reseteo de contraseña de SIIF-CF \n\nNombre:\nUsuario:\n",
+  "resolucion": "Se realiza la validación y se procede con el reseteo de la calve, indicándole al usuario colocar la en los campos de usuario y contraseña el nombre de usuario asignado en la aplicación, en la siguiente página en el campo de contraseña actual nuevamente colocar el usuario asignado e inmediatamente en la parte siguiente generar una nueva contraseña\n\n",
+  "createdAt": {
+    "$date": "2025-10-29T20:43:16.937Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-14T20:55:01.369Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690cf6ab69c2f78a48ee5b71"
+  },
+  "nombre": "Levantamientos de parametros",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nEl usuario se comunica solicitando el cambio de fuerza comercial de un cliente.\n\nDetalle del cambio:\n\nDe:\nA:\n\nSolicitud adicional:\n\nCC cliente:",
+  "resolucion": "Se procede con la validacion en el sistema de la fuerza comercial del cliente y se realiza el cambio a la requerida",
+  "createdAt": {
+    "$date": "2025-11-06T19:27:39.181Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-14T15:50:34.508Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690cfc6069c2f78a48ee5b94"
+  },
+  "nombre": "Error Acceptation \\ Firma Documentos",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nEl usuario se comunica con la mesa de servicios indicando que, al enviar el enlace de aceptación de documentos, el receptor no puede firmar el formulario.\n\nReporta:\n\nNombre cliente:\nCc cliente",
+  "resolucion": "Se realiza la validación y se orienta al cliente para que, dentro del módulo de vinculación digital, en la sección donde se encuentran los documentos a firmar, seleccione la opción “VER” ubicada frente al documento correspondiente. Debe abrir el documento y esperar a que cargue completamente. Una vez cargado, cerrar la ventana y posteriormente validar el enlace enviado al cliente para confirmar si ya permite realizar la firma del documento en cuestión",
+  "createdAt": {
+    "$date": "2025-11-06T19:52:00.081Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:31:48.614Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "690cff7f69c2f78a48ee5b97"
+  },
+  "nombre": "Error código de verificación o link por operador móvil",
+  "producto": "Vinculacion digital",
+  "contenido": "Buen dia.\n\nUsuario se comunica con la mesa de servicios indicando que, al enviar el código de verificación, este no llega al receptor ni por mensaje de texto ni por WhatsApp. \n\nReporta:\n\nNombre cliente:\nCc cliente ",
+  "resolucion": "ooo",
+  "createdAt": {
+    "$date": "2025-11-06T20:05:19.386Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-12T16:32:07.050Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691364d643ddb1528f263460"
+  },
+  "nombre": "Cierre caso - Credenciales",
+  "producto": "Correo - envio credenciales",
+  "contenido": "Buen dia.\n\nSe realiza el proceso indicado en el caso y se realiza envio de las credenciales por correo con la informacion correspondiente para el acceso.\n\nPor favor realizar pruebas de acceso con las credenciales enviadas, se procede con el cierre del caso",
+  "resolucion": "En casos SIIF:\n\n**Nota: Tener presente en ingresar en el apartado de contraseña con el mismo usuario, luego solicitara cambio de contraseña, esta debe ser alfa numérica con una mayúscula y dos números. NO DEBE LLEVAR CARACTERES ESPECIALES NI SER UNA CONTRASEÑA USADA ANTERIORMENTE, Ejemplo; Colombia25",
+  "createdAt": {
+    "$date": "2025-11-11T16:31:18.586Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-14T20:55:27.998Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691dca25b0a8c0ac21bab68e"
+  },
+  "nombre": "Equipo no aranca - pantalla en espera",
+  "producto": "Portatil",
+  "contenido": "Buen día.\n\nEl usuario informa que el equipo no inicia correctamente; la pantalla permanece en negro con el mensaje “En espera”.\n\nNombre:\nTeléfono:\nCorreo:",
+  "resolucion": "Estamos registrando los retrasos en el inicio de los equipos para identificar qué está generando estas demoras. Dado que esta trabajando desde casa, voy a generar un caso de seguimiento. Una vez recibamos la confirmación sobre la configuración adecuada, dejaremos el equipo encendido para evitar nuevos inconvenientes.\n\nDespués de esto, solo será necesario reiniciarlo una vez por semana. El reinicio diario es una buena práctica, pero en este momento está generando el error de inicio, así que recomendamos reducirlo a un máximo de dos veces por semana mientras se completa la configuración correcta del PC. Esto ayudará a agilizar el arranque y evitar demoras innecesarias.",
+  "createdAt": {
+    "$date": "2025-11-19T13:46:13.790Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-19T13:46:13.790Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "691ddc8867048d00bec27395"
+  },
+  "nombre": "Segumiento a caso",
+  "producto": "Correo - envio credenciales",
+  "contenido": "Buen día.\n\nEl usuario se comunica para realizar seguimiento al caso [...].\n\nNombre:",
+  "resolucion": "Se valida el caso indicado por el usuario y se le brindan las especificaciones correspondientes, teniendo en cuenta las notas y observaciones registradas por el área resolutora.\n\nNota: En caso de ser necesario, el caso será nuevamente reportado, ya que aún no se ha dado solución y la fecha estimada de atención ya fue superada.",
+  "createdAt": {
+    "$date": "2025-11-19T15:04:40.236Z"
+  },
+  "updatedAt": {
+    "$date": "2025-11-19T15:04:40.236Z"
+  },
+  "__v": 0
+}]

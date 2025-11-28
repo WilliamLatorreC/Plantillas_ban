@@ -3,13 +3,18 @@ import jwt from "jsonwebtoken";
 export const verifyToken = (req, res, next) => {
   const token = req.headers["authorization"];
 
-  if (!token) return res.status(403).json({ error: "No autorizado" });
+  if (!token) {
+    return res.status(401).json({ message: "No hay token, acceso denegado" });
+  }
+
+  const tokenSinBearer = token.replace("Bearer ", "");
 
   try {
-    const decoded = jwt.verify(token.replace("Bearer ", ""), process.env.JWT_SECRET);
-    req.user = decoded;
+    const decoded = jwt.verify(tokenSinBearer, process.env.JWT_SECRET);
+    req.usuario = decoded; // guardamos la info del usuario
     next();
-  } catch (err) {
-    return res.status(401).json({ error: "Token inválido o expirado" });
+  } catch (error) {
+    return res.status(401).json({ message: "Token inválido" });
   }
 };
+

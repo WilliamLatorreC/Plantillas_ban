@@ -6,10 +6,13 @@ import dotenv from "dotenv";
 import categoriaRoutes from './routes/categorias.js';
 import authRoutes from "./routes/auth.js";
 import Plantilla from './models/Plantilla.js';
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
 
 dotenv.config();
 
 const app = express();
+app.use(helmet());
 
 // ===========================
 // 1. CONFIGURAR CORS
@@ -42,9 +45,14 @@ app.options('*', cors());
 // 3. RUTAS IMPORTADAS
 // ===========================
 
+const loginLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 10,  
+  message: "Demasiados intentos, intenta más tarde"
+});
 
 // Rutas de autenticación
-app.use("/api/auth", authRoutes);
+app.use("/api/auth", authRoutes, loginLimiter);
 
 // Rutas de categorías
 app.use('/categorias', categoriaRoutes);
