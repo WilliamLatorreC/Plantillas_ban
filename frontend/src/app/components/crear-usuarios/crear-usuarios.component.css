@@ -1,0 +1,37 @@
+.crear-usuario-form {
+  max-width: 350px;
+  margin: 30px auto;
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.crear-usuario-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.crear-usuario-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font-size: 15px;
+}
+
+.crear-usuario-form button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background: #0078ff;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.crear-usuario-form button:hover {
+  background: #005fcc;
+}

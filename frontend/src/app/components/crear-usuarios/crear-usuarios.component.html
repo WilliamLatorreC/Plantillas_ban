@@ -1,0 +1,12 @@
+<div class="crear-usuario-form">
+  <h2>Crear Usuario</h2>
+
+  <form (ngSubmit)="crearUsuario()">
+    <input type="email" [(ngModel)]="correo" name="correo" placeholder="Correo" required>
+    <input type="password" [(ngModel)]="contrasena" name="contrasena" placeholder="Contraseña" required>
+
+    <button type="submit">Crear Usuario</button>
+  </form>
+
+  <p *ngIf="mensaje">{{ mensaje }}</p>
+</div>

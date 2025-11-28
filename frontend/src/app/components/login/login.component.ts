@@ -20,6 +20,7 @@ export class LoginComponent {
   correo = '';
   contrasena = '';
   error: string = '';
+  mensajeError: string = '';
   
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -35,8 +36,13 @@ export class LoginComponent {
         this.router.navigate(['/plantillas']);        
       },
       error: (err) => {
-        console.error(err);
-        this.error = err.error?.message || "Error inesperado";
+        if (err.status === 400) {
+          this.mensajeError = "El usuario no existe.";
+        } else if (err.status === 401) {
+          this.mensajeError = "Contraseña incorrecta.";
+        } else {
+          this.mensajeError = "Error en el servidor. Intenta nuevamente.";
+        }
       }
     });
   }

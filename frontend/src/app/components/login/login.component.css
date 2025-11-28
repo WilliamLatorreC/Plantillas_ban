@@ -101,3 +101,13 @@
   font-size: 0.9rem;
   font-weight: 600;
 }
+
+.error-message {
+  background: #ffdddd;
+  color: #b30000;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 10px;
+  text-align: center;
+  border: 1px solid #ff5c5c;
+}
