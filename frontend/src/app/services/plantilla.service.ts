@@ -14,8 +14,8 @@ export interface Plantilla {
   providedIn: 'root'
 })
 export class PlantillaService {
-  //private apiUrl = 'http://localhost:3000/api/plantillas';
-    private apiUrl = 'https://plantillas-ban.onrender.com/api/plantillas';
+  private apiUrl = 'http://localhost:3000/api/plantillas';
+  //private apiUrl = 'https://plantillas-ban.onrender.com/api/plantillas';
   constructor(private http: HttpClient) {}
 
   buscar(q: string) {
@@ -44,6 +44,13 @@ export class PlantillaService {
         Authorization: localStorage.getItem("token") || ""
       }
     });
+  }
+
+  updatePlantilla(id: string, data: any) {
+    return this.http.put(
+      `${this.apiUrl}/plantillas/${id}`,
+      data
+    );
   }
 
 }

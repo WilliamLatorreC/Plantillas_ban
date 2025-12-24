@@ -2,8 +2,10 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SeleccionClienteComponent } from '../seleccion-cliente/seleccion-cliente.component';
 import { ListTemplatesComponent } from '../list-templates/list-templates.component';
-import { VistaPreviewComponent } from '../vista-preview/vista-preview.component';
+import { PlantillaService } from '../../services/plantilla.service';
 import { FormsModule } from '@angular/forms';
+import { VistaPreviewComponent } from '../vista-preview/vista-preview.component';
+
 
 @Component({
   selector: 'app-flujo',
@@ -21,6 +23,11 @@ export class FlujoComponent {
   cliente: any = null;
   plantilla: any = null;
   contenidoFinal: string = '';
+  
+  guardando = false;
+  mensajeGuardado = '';
+
+  constructor(private PlantillaService: PlantillaService) {}
 
   onClienteSeleccionado(c: any) {
     this.cliente = c;
@@ -63,6 +70,28 @@ export class FlujoComponent {
       alert('Contenido copiado al portapapeles 📋');
     });
   }
+
+guardarCambios() {
+  if (!this.plantilla) return;
+
+  this.guardando = true;
+  this.mensajeGuardado = '';
+
+  this.PlantillaService.updatePlantilla(this.plantilla._id, {
+    contenido: this.contenidoFinal,
+    resolucion: this.plantilla.resolucion
+  })
+  .subscribe({
+    next: (res: any) => {
+      this.guardando = false;
+      this.mensajeGuardado = '✅ Cambios guardados correctamente';
+    },
+    error: () => {
+      this.guardando = false;
+      this.mensajeGuardado = '❌ Error al guardar cambios';
+    }
+  });
+}
 
 
 }

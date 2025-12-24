@@ -39,4 +39,24 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Actualizar plantilla
+router.put('/:id', async (req, res) => {
+  try {
+    const { contenido, resolucion } = req.body;
+
+    const plantilla = await Plantilla.findByIdAndUpdate(
+      req.params.id,
+      {
+        contenido,
+        resolucion
+      },
+      { new: true }
+    );
+
+    res.json(plantilla);
+  } catch (error) {
+    res.status(500).json({ error: 'Error al actualizar plantilla' });
+  }
+});
+
 export default router;

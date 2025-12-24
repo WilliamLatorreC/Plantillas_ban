@@ -32,10 +32,6 @@
     <div class="resultado-header">
         <h3>📄 Vista final</h3>
 
-        <button class="btn-copiar" (click)="copiarContenido()">
-        📋 Copiar
-        </button>
-
         <button class="btn-reset" (click)="procesarContenido()">
             🔄 Restaurar
         </button>
@@ -53,4 +49,22 @@
     </p>
 
     </div>
+
+    <div class="acciones">
+      <button
+        class="btn-guardar"
+        (click)="guardarCambios()"
+        [disabled]="guardando"
+      >
+        💾 {{ guardando ? 'Guardando...' : 'Guardar cambios' }}
+      </button>
+
+      <button class="btn-copiar" (click)="copiarContenido()">
+        📋 Copiar
+      </button>
+    </div>
+    <p class="mensaje-guardado" *ngIf="mensajeGuardado">
+      {{ mensajeGuardado }}
+    </p>
+
 </div>
