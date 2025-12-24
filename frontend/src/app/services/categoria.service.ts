@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoriaService {
-  private apiUrl = 'http://localhost:3000/categorias';
+  //private apiUrl = 'http://localhost:3000/categorias';
+  private apiUrl = 'https://plantillas-ban.onrender.com/categorias';
 
   constructor(private http: HttpClient) {}
 
