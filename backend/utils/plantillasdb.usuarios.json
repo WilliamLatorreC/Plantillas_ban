@@ -1,0 +1,24 @@
+[{
+  "_id": {
+    "$oid": "69289ddad770c953edec936a"
+  },
+  "correo": "admin@ban100.com.co",
+  "contrasena": "$2b$10$eJ705Hsxy180Gfd9ieiaT.1Ykxv6G1HXrKjupw0SnYLVTzqZF3l0e",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692a3f670ae78d38e29d93f3"
+  },
+  "correo": "test@ban100.com.co",
+  "contrasena": "$2b$10$9TWz0A5oKPE4h16oKGvZxOtJLIGUc5JBMGQuzO4oQJCkZ6G519yYi",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "692a6d31fbf62713418fd9e4"
+  },
+  "correo": "test2@ban100.com.co",
+  "contrasena": "$2b$10$soHIESV/L8qhp3USIP1I5ekY2YPgI3LlhuHcvRwEyYpf.7S2ZxCjq",
+  "__v": 0
+}]

@@ -7,7 +7,7 @@ import {verifyToken} from "../Middlewares/authMiddleware.js";
 const router = express.Router();
 
 // ✔ Crear usuario admin SOLO una vez
-router.get("/crear-admin", async (req, res) => {
+/*router.get("/crear-admin", async (req, res) => {
   try {
     const existe = await Usuario.findOne({ correo: "admin@ban100.com.co" });
 
@@ -28,7 +28,7 @@ router.get("/crear-admin", async (req, res) => {
     console.error("❌ ERROR CREANDO ADMIN:", error);
     res.status(500).json({ message: "Error al crear admin" });
   }
-});
+});*/
 
 router.post("/crear-usuario", verifyToken, async (req, res) => {
   try {
@@ -63,24 +63,39 @@ router.post("/crear-usuario", verifyToken, async (req, res) => {
 
 // ✔ LOGIN
 router.post("/login", async (req, res) => {
+
+  //console.log("BODY RECIBIDO:", req.body);
   try {
     const { correo, contrasena } = req.body;
 
+    if (!correo || !contrasena) {
+      return res.status(400).json({ message: "Datos incompletos" });
+    }
+
+    // Buscar por el campo correcto
+    //console.log("BUSCANDO USUARIO:", correo);
     const usuario = await Usuario.findOne({ correo });
     if (!usuario) {
-      return res.status(400).json({ message: "El usuario no existe" });
+      return res.status(400).json({ message: "Usuario no encontrado" });
     }
 
-    const passwordValida = await bcrypt.compare(contrasena, usuario.contrasena);
-    if (!passwordValida) {
-      return res.status(401).json({ message: "Contraseña incorrecta" });
+    //console.log("RESULTADO:", usuario);
+    // Comparar la contraseña (con el campo correcto)
+    const validPassword = await bcrypt.compare(contrasena, usuario.contrasena);
+    if (!validPassword) {
+      return res.status(400).json({ message: "Contraseña incorrecta" });
     }
 
-    const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, {
-      expiresIn: "3h",
+    // Crear token
+    const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+
+    res.json({
+      message: "Login exitoso",
+      token,
+      usuario: {
+        correo: usuario.correo
+      }
     });
-
-    res.json({ message: "Login correcto", token });
 
   } catch (error) {
     console.error(error);

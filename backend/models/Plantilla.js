@@ -6,9 +6,10 @@ const plantillaSchema = new mongoose.Schema({
   contenido: { type: String, required: true },
   resolucion: { type: String, required: false },
   categoria: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Categoria' 
-  }
+    type: mongoose.Schema.Types.ObjectId, ref: 'Categoria' 
+  },
+  creador: {type: mongoose.Schema.Types.ObjectId, ref: "Usuario"},
+
 }, {
   timestamps: true 
 });

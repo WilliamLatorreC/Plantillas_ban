@@ -14,28 +14,36 @@ export interface Plantilla {
   providedIn: 'root'
 })
 export class PlantillaService {
-  private apiUrl = environment.apiUrl;
-
+  //private apiUrl = 'http://localhost:3000/api/plantillas';
+    private apiUrl = 'http://localhost:3000/api/plantillas';
   constructor(private http: HttpClient) {}
 
-  // ===== OBTENER TODAS LAS PLANTILLAS =====
-  getPlantillas(): Observable<Plantilla[]> {
-    return this.http.get<Plantilla[]>(`${this.apiUrl}/plantillas`);
+  buscar(q: string) {
+    return this.http.get<any[]>(`${this.apiUrl}/buscar?q=${q}`);
   }
 
-  // ===== CREAR PLANTILLA =====
-  crearPlantilla(plantilla: Plantilla): Observable<Plantilla> {
-    return this.http.post<Plantilla>(`${this.apiUrl}/plantillas`, plantilla);
+  crear(plantilla: any) {
+    return this.http.post(this.apiUrl, plantilla);
   }
 
-  // ===== ACTUALIZAR PLANTILLA =====
-  actualizarPlantilla(plantilla: Plantilla): Observable<Plantilla> {
-    if (!plantilla._id) throw new Error('ID de plantilla requerido');
-    return this.http.put<Plantilla>(`${this.apiUrl}/plantillas/${plantilla._id}`, plantilla);
+  obtener(id: string) {
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
-  // ===== ELIMINAR PLANTILLA =====
-  eliminarPlantilla(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/plantillas/${id}`);
+  getPlantillas() {
+    return this.http.get<any[]>("http://localhost:3000/api/plantillas", {
+      headers: {
+        Authorization: localStorage.getItem("token") || ""
+      }
+    });
   }
+
+  crearPlantilla(data: any) {
+    return this.http.post("http://localhost:3000/api/plantillas", data, {
+      headers: {
+        Authorization: localStorage.getItem("token") || ""
+      }
+    });
+  }
+
 }

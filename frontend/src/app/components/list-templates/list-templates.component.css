@@ -1,0 +1,217 @@
+/* ================================
+   📦 CONTENEDOR GENERAL
+================================ */
+.container {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.container h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1e3a8a;
+}
+
+/* ================================
+   🔍 BUSCADOR DE PLANTILLAS
+================================ */
+.search-box input {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #3b82f6;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.search-box input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* ================================
+   🧩 GRID DE PLANTILLAS
+================================ */
+.plantillas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+/* ================================
+   📄 CARD DE PLANTILLA
+================================ */
+.plantilla-card {
+  background: #f8fafc;
+  border-radius: 14px;
+  padding: 1rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.plantilla-card h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.plantilla-card .preview {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.3;
+}
+
+/* HOVER */
+.plantilla-card:hover {
+  background: #eff6ff;
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.18);
+}
+
+/* SELECCIONADA */
+.plantilla-card.seleccionada {
+  border-color: #3b82f6;
+  background: #eff6ff;
+  box-shadow: 0 8px 22px rgba(59, 130, 246, 0.25);
+}
+
+/* ================================
+   ✍ BOTÓN PLANTILLA PERSONALIZADA
+================================ */
+.btn-personalizada {
+  align-self: flex-start;
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: white;
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+}
+
+.btn-personalizada:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.45);
+}
+
+/* ================================
+   📝 TEXTO PERSONALIZADO
+================================ */
+textarea {
+  width: 100%;
+  min-height: 140px;
+  padding: 0.8rem 1rem;
+  border-radius: 14px;
+  border: 2px dashed #3b82f6;
+  font-size: 0.9rem;
+  outline: none;
+  resize: vertical;
+  background: #f8fafc;
+  transition: all 0.25s ease;
+  animation: fadeSlideIn 0.35s ease;
+}
+
+textarea:focus {
+  border-style: solid;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.personalizado-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.acciones {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-cancelar {
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-cancelar:hover {
+  background: #d1d5db;
+}
+
+
+/* ================================
+   📄 DETALLE DE PLANTILLA
+================================ */
+.plantilla-detalle {
+  background: #f1f5f9;
+  border-radius: 16px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  animation: fadeSlideIn 0.35s ease;
+}
+
+.plantilla-detalle h4 {
+  margin: 0;
+  color: #1e293b;
+}
+
+.contenido-completo pre {
+  background: #ffffff;
+  padding: 0.8rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  max-height: 200px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  box-shadow: inset 0 0 0 1px #e2e8f0;
+}
+
+.resolucion {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+/* ================================
+   ✨ ANIMACIONES
+================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

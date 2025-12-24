@@ -25,8 +25,11 @@ export class CreaCategoriaComponent implements OnInit {
     private categoriaService: CategoriaService,
     private plantillaService: PlantillaService
   ) {}
+  ngOnInit(): void {
+    throw new Error('Method not implemented.');
+  }
 
-  ngOnInit() {
+/*ngOnInit() {
     this.plantillaService.getPlantillas().subscribe({
       next: (data) => {
         this.plantillas = data;
@@ -34,7 +37,7 @@ export class CreaCategoriaComponent implements OnInit {
       },
       error: () => (this.mensaje = '❌ Error al cargar plantillas')
     });
-  }
+  }*/
 
   agruparPorProducto(lista: any[]) {
     const grupos: { [key: string]: any[] } = {};

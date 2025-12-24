@@ -1,0 +1,17 @@
+<div *ngIf="cliente && plantilla" class="preview-card">
+  <h3>📄 Vista previa</h3>
+
+  <div class="info">
+    <p><b>Cliente:</b> {{ cliente.nombre }}</p>
+    <p><b>Plantilla:</b> {{ plantilla.nombre }}</p>
+    <p><b>Resolución:</b> {{ plantilla.resolucion }}</p>
+  </div>
+
+  <div class="contenido">
+    <pre>{{ contenidoProcesado }}</pre>
+  </div>
+</div>
+
+<div *ngIf="!cliente || !plantilla" class="hint">
+  Selecciona un cliente y una plantilla para ver el contenido
+</div>

@@ -1,0 +1,200 @@
+/* ================================
+   🧩 TARJETA PRINCIPAL
+================================ */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #1e3a8a;
+}
+
+/* ================================
+   🔍 BUSCADOR
+================================ */
+.card input[type="text"] {
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #3b82f6;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.card input[type="text"]:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+/* ================================
+   📋 RESULTADOS DE BÚSQUEDA
+================================ */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+li {
+  background: #f8fafc;
+  padding: 0.7rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #1e293b;
+  transition: all 0.25s ease;
+  border-left: 4px solid #3b82f6;
+}
+
+li:hover {
+  background: #eff6ff;
+  transform: translateX(6px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* ================================
+   ❌ CLIENTE NO ENCONTRADO
+================================ */
+.card div p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.card div button {
+  margin-top: 0.6rem;
+  background: #3b82f6;
+  color: white;
+  border: none;
+  padding: 0.55rem 1.2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.25s ease;
+}
+
+.card div button:hover {
+  background: #2563eb;
+  transform: scale(1.03);
+}
+
+/* ================================
+   📝 FORMULARIO CREAR CLIENTE
+================================ */
+.card > div:last-child {
+  background: #f1f5f9;
+  border-radius: 14px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  animation: fadeSlideIn 0.4s ease;
+}
+
+.card > div:last-child input {
+  padding: 0.6rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.card > div:last-child input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+/* BOTÓN GUARDAR */
+.card > div:last-child button {
+  margin-top: 0.6rem;
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.card > div:last-child button:hover {
+  background: #059669;
+}
+
+.crear-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.acciones {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: flex-end;
+}
+
+.btn-guardar {
+  background: #22c55e;
+  color: white;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-guardar:hover {
+  background: #16a34a;
+}
+
+.btn-cancelar {
+  background: #e5e7eb;
+  color: #374151;
+  border: none;
+  padding: 0.45rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btn-cancelar:hover {
+  background: #d1d5db;
+}
+
+
+/* ================================
+   ✨ ANIMACIONES
+================================ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

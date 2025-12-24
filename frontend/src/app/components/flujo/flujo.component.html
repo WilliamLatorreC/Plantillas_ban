@@ -1,0 +1,56 @@
+<div class="flujo-container">
+
+  <!-- PASO 1: CLIENTE -->
+  <section class="paso activo">
+    <h3>1️⃣ Selecciona un cliente</h3>
+
+    <app-seleccion-cliente
+      (seleccionar)="onClienteSeleccionado($event)">
+    </app-seleccion-cliente>
+  </section>
+
+  <!-- PASO 2: PLANTILLAS -->
+  <section class="paso"
+           [class.bloqueado]="!cliente"
+           [class.activo]="cliente && !plantilla">
+
+    <h3>
+      2️⃣ Selecciona una plantilla
+      <span *ngIf="!cliente" class="hint">
+        (Primero selecciona un cliente)
+      </span>
+    </h3>
+
+    <app-list-templates
+      (plantilla)="onPlantillaSeleccionada($event)">
+    </app-list-templates>
+  </section>
+
+  <!-- PASO 3: RESULTADO -->
+    <div class="resultado" *ngIf="contenidoFinal">
+
+    <div class="resultado-header">
+        <h3>📄 Vista final</h3>
+
+        <button class="btn-copiar" (click)="copiarContenido()">
+        📋 Copiar
+        </button>
+
+        <button class="btn-reset" (click)="procesarContenido()">
+            🔄 Restaurar
+        </button>
+    </div>
+
+    <!-- CONTENIDO EDITABLE -->
+    <textarea
+        class="documento"
+        [(ngModel)]="contenidoFinal"
+        rows="12"
+    ></textarea>
+
+    <p class="resolucion" *ngIf="plantilla?.resolucion">
+        <b>Resolución:</b> {{ plantilla.resolucion }}
+    </p>
+
+    </div>
+</div>

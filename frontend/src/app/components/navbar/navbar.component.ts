@@ -10,9 +10,10 @@ import { AuthService } from '../../services/auth.service';
   template: `
   <nav class="navbar">
     <div class="navbar-content">
-      <button class="btn" (click)="ir('/')">Inicio</button>
+      <button class="btn" (click)="ir('/flujo')">Inicio</button>
       <button class="btn btn-secondary" (click)="ir('/crear-plantilla')">Crear Plantilla</button>
       <button class="btn btn-secondary" (click)="ir('/categorias')">Crear categorias</button>
+      <button class="btn btn-secondary" (click)="ir('/templates')" style="cursor: not-allowed;" disabled>Plantillas</button>
       <button (click)="cerrarSesion()" class="btn btn-secondary btn-salir">
         Cerrar sesión
       </button>

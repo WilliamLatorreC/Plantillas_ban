@@ -7,13 +7,15 @@ import { CrearUsuariosComponent } from './components/crear-usuarios/crear-usuari
 //import { AuthGuard } from './guard/auth.guard';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
+import { FlujoComponent } from './components/flujo/flujo.component';
 
 export const routes: Routes = [
       { path: '', component: TemplatesComponent, canActivate: [AuthGuard] },
       { path: 'crear-plantilla', component: CreateTemplatesComponent, canActivate: [AuthGuard] },
       { path: 'lista-plantillas', component: ListTemplatesComponent, canActivate: [AuthGuard]  },
       { path: 'categorias', component: CreaCategoriaComponent, canActivate: [AuthGuard] },  
-      { path: 'crear-usuarios', component: CrearUsuariosComponent, canActivate: [AuthGuard] },     
+      { path: 'crear-usuarios', component: CrearUsuariosComponent, canActivate: [AuthGuard] },  
+      { path: 'flujo', component: FlujoComponent, canActivate: [AuthGuard] },      
       { path: 'login', component: LoginComponent},   
       { path: '**', redirectTo: '', canActivate: [AuthGuard] }
 ];

@@ -8,11 +8,18 @@ import authRoutes from "./routes/auth.js";
 import Plantilla from './models/Plantilla.js';
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
+import clientesRoutes from "./routes/clientes.js";
+import plantillasRoutes from "./routes/plantillas.js";
 
 dotenv.config();
 
 const app = express();
 app.use(helmet());
+
+app.use((req, res, next) => {
+    console.log("🔵 Petición recibida:", req.method, req.url);
+    next();
+});
 
 // ===========================
 // 1. CONFIGURAR CORS
@@ -29,6 +36,7 @@ app.use(cors({
 
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
 // ===========================
 // 2. CONEXIÓN MONGO
@@ -48,13 +56,17 @@ app.options('*', cors());
 
 const loginLimiter = rateLimit({
   windowMs: 5 * 60 * 1000,
-  max: 10,  
+  max: 10,
   message: "Demasiados intentos, intenta más tarde"
 });
 
-// Rutas de autenticación
+// El rate limiter SOLO para el login, antes de las rutas
+app.use("/api/auth/login", loginLimiter);
 app.use("/api/auth", authRoutes);
-app.use("/api/auth/login", loginLimiter); 
+
+
+app.use('/api/clientes', clientesRoutes);
+app.use("/api/plantillas", plantillasRoutes);
 
 // Rutas de categorías
 app.use('/categorias', categoriaRoutes);

@@ -1,0 +1,46 @@
+<div class="card">
+  <h3>1️⃣ Buscar cliente</h3>
+
+  <input
+    type="text"
+    placeholder="Nombre, CC o email"
+    [(ngModel)]="busqueda"
+    (input)="buscar()"
+  />
+
+  <!-- RESULTADOS -->
+  <ul *ngIf="resultados.length">
+    <li *ngFor="let c of resultados" (click)="elegir(c)">
+      {{ c.nombre }} — {{ c.cc }}
+    </li>
+  </ul>
+
+  <!-- NO ENCONTRADO -->
+  <div *ngIf="busqueda.length > 2 && !resultados.length">
+    <p>No existe el cliente</p>
+    <button (click)="mostrandoCrear = true">
+      ➕ Registrar cliente
+    </button>
+  </div>
+
+  <!-- FORMULARIO -->
+  <div *ngIf="mostrandoCrear" class="crear-box">
+
+    <input placeholder="Nombre" [(ngModel)]="nuevoCliente.nombre" />
+    <input placeholder="CC" [(ngModel)]="nuevoCliente.cc" />
+    <input placeholder="Teléfono" [(ngModel)]="nuevoCliente.telefono" />
+    <input placeholder="Email" [(ngModel)]="nuevoCliente.email" />
+    <input placeholder="Dirección" [(ngModel)]="nuevoCliente.direccion" />
+
+    <div class="acciones">
+      <button class="btn-guardar" (click)="crearCliente()">
+        💾 Guardar
+      </button>
+
+      <button class="btn-cancelar" (click)="cancelarCrear()">
+        ❌ Cancelar
+      </button>
+    </div>
+
+  </div>
+</div>

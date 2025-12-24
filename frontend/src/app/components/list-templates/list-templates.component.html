@@ -1,1 +1,69 @@
-<p>list-templates works!</p>
+<div class="container">
+
+  <h3>2️⃣ Elige una plantilla</h3>
+
+  <div class="search-box">
+    <input
+      type="text"
+      placeholder="Buscar plantilla..."
+      [(ngModel)]="busqueda"
+      (input)="buscar()"
+    />
+  </div>
+
+  <!-- GRID DE PLANTILLAS -->
+  <div class="plantillas-grid" *ngIf="plantillas.length && !modoPersonalizado">
+    <div
+      class="plantilla-card"
+      *ngFor="let p of plantillas"
+      [class.seleccionada]="plantillaSeleccionada?._id === p._id"
+      (click)="seleccionar(p)"
+    >
+      <h4>{{ p.nombre }}</h4>
+      <p class="preview">
+        {{ p.descripcion || (p.contenido | slice:0:80) + '...' }}
+      </p>
+    </div>
+  </div>
+
+  <!-- BOTÓN PLANTILLA PERSONALIZADA -->
+  <button class="btn-personalizada" (click)="activarPersonalizado()">
+    ✍ Plantilla personalizada
+  </button>
+
+  <!-- TEXTO PERSONALIZADO -->
+  <div *ngIf="modoPersonalizado" class="personalizado-box">
+
+    <textarea
+      [(ngModel)]="textoPersonalizado"
+      (input)="personalizado.emit(textoPersonalizado)"
+      placeholder="Escribe aquí la plantilla personalizada..."
+    ></textarea>
+
+    <div class="acciones">
+      <button class="btn-cancelar" (click)="cerrarPersonalizado()">
+        ❌ Cancelar
+      </button>
+    </div>
+
+  </div>
+
+  <!-- DETALLE DE PLANTILLA -->
+ <!-- <div *ngIf="plantillaSeleccionada" class="plantilla-detalle">
+
+    <h4>{{ plantillaSeleccionada.nombre }}</h4>
+
+    <div class="contenido-completo">
+      <h5>Contenido de la plantilla</h5>
+      <pre>{{ plantillaSeleccionada.contenido }}</pre>
+    </div>
+
+    <p class="resolucion">
+      📄 Resolución:
+      <b>{{ plantillaSeleccionada.resolucion || 'No definida' }}</b>
+    </p>
+
+  </div>-->
+
+
+</div>

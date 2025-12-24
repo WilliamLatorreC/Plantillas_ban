@@ -30,11 +30,14 @@ export class LoginComponent {
       contrasena: this.contrasena
     };
 
+    console.log("ENVIANDO:", data);
+
     this.authService.login(data).subscribe({
       next: (resp: any) => {
         localStorage.setItem('token', resp.token);  
         this.router.navigate(['/plantillas']);        
       },
+      
       error: (err) => {
         if (err.status === 400) {
           this.mensajeError = "El usuario no existe.";
