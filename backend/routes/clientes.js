@@ -34,4 +34,37 @@ router.post('/', async (req, res) => {
   }
 });
 
+/* EXPORTAR CLIENTES */
+router.get("/exportar", async (req, res) => {
+  try {
+    const clientes = await Cliente.find().lean();
+    res.json(clientes);
+  } catch (error) {
+    res.status(500).json({ message: "Error exportando clientes" });
+  }
+});
+
+/* IMPORTAR CLIENTES */
+router.post("/importar", async (req, res) => {
+  try {
+    const clientes = req.body;
+
+    if (!Array.isArray(clientes)) {
+      return res.status(400).json({ message: "Formato inválido" });
+    }
+
+    await Cliente.insertMany(clientes, { ordered: false });
+
+    res.json({
+      message: "Clientes importados correctamente",
+      total: clientes.length
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error importando clientes",
+      error: error.message
+    });
+  }
+});
+
 export default router;

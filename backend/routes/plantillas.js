@@ -1,4 +1,5 @@
 import { Router } from "express";
+import express from "express";
 import {
   buscarPlantillas,
   crearPlantilla,
@@ -6,7 +7,7 @@ import {
 } from "../controllers/plantilla.controller.js";
 import Plantilla from "../models/Plantilla.js";
 
-const router = Router();
+const router = express.Router();
 
 // routes/plantillas.js
 router.get("/buscar", async (req, res) => {
@@ -42,20 +43,20 @@ router.get("/:id", async (req, res) => {
 // Actualizar plantilla
 router.put('/:id', async (req, res) => {
   try {
-    const { contenido, resolucion } = req.body;
-
-    const plantilla = await Plantilla.findByIdAndUpdate(
+    const plantillaActualizada = await Plantilla.findByIdAndUpdate(
       req.params.id,
-      {
-        contenido,
-        resolucion
-      },
+      req.body,
       { new: true }
     );
 
-    res.json(plantilla);
+    if (!plantillaActualizada) {
+      return res.status(404).json({ error: 'Plantilla no encontrada' });
+    }
+
+    res.json(plantillaActualizada);
   } catch (error) {
-    res.status(500).json({ error: 'Error al actualizar plantilla' });
+    console.error(error);
+    res.status(500).json({ error: 'Error al actualizar la plantilla' });
   }
 });
 

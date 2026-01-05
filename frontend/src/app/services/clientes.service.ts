@@ -19,4 +19,12 @@ export class ClientesService {
   crear(cliente: any): Observable<any> {
     return this.http.post<any>(this.apiUrl, cliente);
   }
+
+  exportar() {
+    return this.http.get<any[]>(`${this.apiUrl}/exportar`);
+  }
+
+  importar(clientes: any[]) {
+    return this.http.post(`${this.apiUrl}/importar`, clientes);
+  }
 }

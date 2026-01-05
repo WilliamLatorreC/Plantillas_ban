@@ -173,6 +173,26 @@ li:hover {
   background: #d1d5db;
 }
 
+.acciones-import {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.btn-secundario {
+  background: #e5e7eb;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-secundario:hover {
+  background: #d1d5db;
+}
+
+
 
 /* ================================
    ✨ ANIMACIONES

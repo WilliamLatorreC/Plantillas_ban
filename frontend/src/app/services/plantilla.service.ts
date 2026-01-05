@@ -48,7 +48,7 @@ export class PlantillaService {
 
   updatePlantilla(id: string, data: any) {
     return this.http.put(
-      `${this.apiUrl}/plantillas/${id}`,
+      `${this.apiUrl}/${id}`,
       data
     );
   }

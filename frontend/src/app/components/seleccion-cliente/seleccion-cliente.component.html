@@ -1,6 +1,24 @@
 <div class="card">
   <h3>1️⃣ Buscar cliente</h3>
 
+  <div class="acciones-import">
+
+    <button class="btn-secundario" (click)="exportarClientes()">
+      ⬇ Exportar clientes
+    </button>
+
+    <label class="btn-secundario">
+      ⬆ Importar clientes
+      <input
+        type="file"
+        accept=".json"
+        hidden
+        (change)="importarClientes($event)"
+      />
+    </label>
+
+  </div>
+
   <input
     type="text"
     placeholder="Nombre, CC o email"

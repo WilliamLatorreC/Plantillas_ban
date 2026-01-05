@@ -23,7 +23,8 @@ export class FlujoComponent {
   cliente: any = null;
   plantilla: any = null;
   contenidoFinal: string = '';
-  
+  plantillaEditable: any = null;
+
   guardando = false;
   mensajeGuardado = '';
 
@@ -36,6 +37,8 @@ export class FlujoComponent {
 
   onPlantillaSeleccionada(p: any) {
     this.plantilla = p;
+    this.plantillaEditable = { ...p }; 
+
     this.procesarContenido();
   }
 
@@ -71,27 +74,32 @@ export class FlujoComponent {
     });
   }
 
-guardarCambios() {
-  if (!this.plantilla) return;
+  guardarCambios() {
+    if (!this.plantilla) return;
 
-  this.guardando = true;
-  this.mensajeGuardado = '';
+    this.guardando = true;
+    this.mensajeGuardado = '';
 
-  this.PlantillaService.updatePlantilla(this.plantilla._id, {
-    contenido: this.contenidoFinal,
-    resolucion: this.plantilla.resolucion
-  })
-  .subscribe({
-    next: (res: any) => {
-      this.guardando = false;
-      this.mensajeGuardado = '✅ Cambios guardados correctamente';
-    },
-    error: () => {
-      this.guardando = false;
-      this.mensajeGuardado = '❌ Error al guardar cambios';
-    }
-  });
-}
+    this.PlantillaService.updatePlantilla(this.plantilla._id, {
+      contenido: this.contenidoFinal,
+      resolucion: this.plantilla.resolucion
+    })
+    .subscribe({
+      next: (res: any) => {
+        this.guardando = false;
+        this.mensajeGuardado = '✅ Cambios guardados correctamente';
+      },
+      error: () => {
+        this.guardando = false;
+        this.mensajeGuardado = '❌ Error al guardar cambios';
+      }
+    });
+  }
+
+  onCambioPlantilla() {
+    this.plantilla = this.plantillaEditable;
+    this.procesarContenido();
+  }
 
 
 }

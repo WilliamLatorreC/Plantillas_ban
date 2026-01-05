@@ -10,10 +10,11 @@
   </section>
 
   <!-- PASO 2: PLANTILLAS -->
-  <section class="paso"
-           [class.bloqueado]="!cliente"
-           [class.activo]="cliente && !plantilla">
-
+  <section
+    class="paso"
+    [class.bloqueado]="!cliente"
+    [class.activo]="cliente && !plantilla"
+  >
     <h3>
       2️⃣ Selecciona una plantilla
       <span *ngIf="!cliente" class="hint">
@@ -26,45 +27,103 @@
     </app-list-templates>
   </section>
 
-  <!-- PASO 3: RESULTADO -->
-    <div class="resultado" *ngIf="contenidoFinal">
+  <!-- PASO 3: DATOS DE LA PLANTILLA -->
+  <section class="paso activo" *ngIf="plantillaEditable">
 
-    <div class="resultado-header">
-        <h3>📄 Vista final</h3>
+    <h3>
+      🧩 Datos de la plantilla
+      <span class="hint">Editable</span>
+    </h3>
 
-        <button class="btn-reset" (click)="procesarContenido()">
-            🔄 Restaurar
-        </button>
+    <div class="form-grid">
+
+      <div class="form-group">
+        <label>Nombre de la plantilla</label>
+        <input
+          [(ngModel)]="plantillaEditable.nombre"
+          (input)="onCambioPlantilla()"
+        />
+      </div>
+
+      <div class="form-group">
+        <label>Producto</label>
+        <input
+          [(ngModel)]="plantillaEditable.producto"
+          (input)="onCambioPlantilla()"
+        />
+      </div>
+
     </div>
 
-    <!-- CONTENIDO EDITABLE -->
-    <textarea
+    <div class="form-group">
+      <label>Contenido</label>
+      <textarea readonly
+        rows="6"
+        [(ngModel)]="plantillaEditable.contenido"
+        (input)="onCambioPlantilla()"
+      ></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Resolución</label>
+      <textarea
+        rows="4"
+        [(ngModel)]="plantillaEditable.resolucion"
+        (input)="onCambioPlantilla()"
+      ></textarea>
+    </div>
+
+  </section>
+
+  <!-- PASO 4: RESULTADO FINAL -->
+  <section class="paso activo" *ngIf="contenidoFinal">
+
+    <h3>
+      📄 Vista final
+      <span class="hint">Editable</span>
+    </h3>
+
+    <div class="resultado">
+
+      <div class="resultado-header">
+        <strong>Documento generado</strong>
+
+        <div class="acciones">
+          <button class="btn-reset" (click)="procesarContenido()">
+            🔄 Restaurar
+          </button>
+
+          <button
+            class="btn-guardar"
+            (click)="guardarCambios()"
+            [disabled]="guardando"
+          >
+            💾 {{ guardando ? 'Guardando...' : 'Guardar cambios' }}
+          </button>
+
+          <button class="btn-copiar" (click)="copiarContenido()">
+            📋 Copiar
+          </button>
+        </div>
+      </div>
+
+      <textarea
         class="documento"
         [(ngModel)]="contenidoFinal"
         rows="12"
-    ></textarea>
+      ></textarea>
 
-    <p class="resolucion" *ngIf="plantilla?.resolucion">
-        <b>Resolución:</b> {{ plantilla.resolucion }}
-    </p>
+      <p class="resolucion" *ngIf="plantillaEditable?.resolucion">
+        📌 Resolución:
+        <b>{{ plantillaEditable.resolucion }}</b>
+      </p>
+
+      <p class="mensaje-guardado" *ngIf="mensajeGuardado">
+        {{ mensajeGuardado }}
+      </p>
 
     </div>
 
-    <div class="acciones">
-      <button
-        class="btn-guardar"
-        (click)="guardarCambios()"
-        [disabled]="guardando"
-      >
-        💾 {{ guardando ? 'Guardando...' : 'Guardar cambios' }}
-      </button>
-
-      <button class="btn-copiar" (click)="copiarContenido()">
-        📋 Copiar
-      </button>
-    </div>
-    <p class="mensaje-guardado" *ngIf="mensajeGuardado">
-      {{ mensajeGuardado }}
-    </p>
+  </section>
 
 </div>

@@ -109,6 +109,82 @@
     cursor: pointer;
 }
 
+/* FORMULARIOS */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.8rem;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* INPUTS / TEXTAREAS */
+.form-group input,
+.form-group textarea {
+  border-radius: 12px;
+  border: 1px solid #d1d5db;
+  padding: 0.55rem 0.7rem;
+  font-size: 0.9rem;
+  font-family: "Inter", sans-serif;
+  background: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #ffffff;
+}
+
+/* ACCIONES */
+.acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-guardar {
+  background: #16a34a;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.btn-guardar:hover {
+  background: #15803d;
+}
+
+.btn-guardar:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* MENSAJE */
+.mensaje-guardado {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: #16a34a;
+}
 
 /* ANIMACIÓN */
 @keyframes fadeIn {
