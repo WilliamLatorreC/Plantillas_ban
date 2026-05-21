@@ -1,128 +1,403 @@
 <div class="flujo-container">
 
-  <!-- PASO 1: CLIENTE -->
+  <!-- ===================================== -->
+  <!-- PASO 1 CLIENTE -->
+  <!-- ===================================== -->
   <section class="paso activo">
-    <h3>1️⃣ Selecciona un cliente</h3>
+
+    <div class="paso-header">
+      <h3>1️⃣ Seleccionar cliente</h3>
+
+      <span class="badge">
+        Obligatorio
+      </span>
+    </div>
 
     <app-seleccion-cliente
       (seleccionar)="onClienteSeleccionado($event)">
     </app-seleccion-cliente>
+
   </section>
 
-  <!-- PASO 2: PLANTILLAS -->
+  <!-- ===================================== -->
+  <!-- PASO 2 PLANTILLAS -->
+  <!-- ===================================== -->
   <section
     class="paso"
     [class.bloqueado]="!cliente"
     [class.activo]="cliente && !plantilla"
   >
-    <h3>
-      2️⃣ Selecciona una plantilla
+
+    <div class="paso-header">
+
+      <h3>2️⃣ Seleccionar plantilla</h3>
+
       <span *ngIf="!cliente" class="hint">
-        (Primero selecciona un cliente)
+        Selecciona primero un cliente
       </span>
-    </h3>
+
+      <span
+        *ngIf="cliente"
+        class="badge azul"
+      >
+        Cliente seleccionado
+      </span>
+
+    </div>
 
     <app-list-templates
       (plantilla)="onPlantillaSeleccionada($event)">
     </app-list-templates>
+
   </section>
 
-  <!-- PASO 3: DATOS DE LA PLANTILLA -->
-  <section class="paso activo" *ngIf="plantillaEditable">
+  <!-- ===================================== -->
+  <!-- PASO 3 CONFIGURACIÓN -->
+  <!-- ===================================== -->
+  <section
+    class="paso activo"
+    *ngIf="plantillaEditable"
+  >
 
-    <h3>
-      🧩 Datos de la plantilla
-      <span class="hint">Editable</span>
-    </h3>
+    <div class="paso-header">
 
+      <h3>
+        🧩 Configuración de plantilla
+      </h3>
+
+      <span class="badge azul">
+        Editable
+      </span>
+
+    </div>
+
+    <!-- GRID -->
     <div class="form-grid">
 
+      <!-- NOMBRE -->
       <div class="form-group">
-        <label>Nombre de la plantilla</label>
+
+        <label>
+          Nombre plantilla
+        </label>
+
         <input
+          class="form-control"
           [(ngModel)]="plantillaEditable.nombre"
           (input)="onCambioPlantilla()"
         />
+
       </div>
 
+      <!-- PRODUCTO -->
       <div class="form-group">
-        <label>Producto</label>
+
+        <label>
+          Producto
+        </label>
+
         <input
+          class="form-control"
           [(ngModel)]="plantillaEditable.producto"
           (input)="onCambioPlantilla()"
         />
+
+      </div>
+
+      <!-- CATEGORIA -->
+      <div class="form-group">
+
+        <label>
+          Categoría Proactivanet
+        </label>
+
+       <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar categoría..."
+        (input)="buscarCategorias($event)"
+      >
+
+      <select
+        class="form-control"
+        [(ngModel)]="plantillaEditable.categoriaId"
+      >
+
+        <option
+          *ngFor="let cat of categorias"
+          [value]="cat.Id"
+        >
+          {{ cat.Name }}
+        </option>
+
+      </select>
+
+      </div>
+
+      <!-- TIPO -->
+      <div class="form-group">
+
+        <label>
+          Tipo ticket
+        </label>
+
+        <select
+          class="form-control"
+          [(ngModel)]="plantillaEditable.tipoId"
+        >
+
+          <option value="">
+            Seleccionar tipo
+          </option>
+
+          <option
+            value="b4b431c5-2561-404d-ac39-52096de42969"
+          >
+            Requerimiento
+          </option>
+
+          <option
+            value="917afff7-bbda-492b-9fd4-12fbfbcb9b9a"
+          >
+            Incidente
+          </option>
+
+        </select>
+
+      </div>
+
+      <!-- PRIORIDAD -->
+      <div class="form-group">
+
+        <label>
+          Prioridad
+        </label>
+
+        <select
+          class="form-control"
+          [(ngModel)]="plantillaEditable.prioridadId"
+        >
+
+          <option value="">
+            Sin prioridad
+          </option>
+
+          <option value="97bb0f82-c7e0-4c46-a7de-fe89f6702485">
+            Alta
+          </option>
+
+        </select>
+
       </div>
 
     </div>
 
+    <!-- CONTENIDO -->
     <div class="form-group">
-      <label>Contenido</label>
-      <textarea readonly
-        rows="6"
+
+      <label>
+        Contenido plantilla
+      </label>
+
+      <textarea
+        readonly
+        class="form-control textarea-grande"
+        rows="10"
         [(ngModel)]="plantillaEditable.contenido"
-        (input)="onCambioPlantilla()"
       ></textarea>
+
     </div>
 
+    <!-- RESOLUCION -->
     <div class="form-group">
-      <label>Resolución</label>
+
+      <label>
+        Resolución
+      </label>
+
       <textarea
-        rows="4"
+        class="form-control textarea-grande"
+        rows="6"
         [(ngModel)]="plantillaEditable.resolucion"
         (input)="onCambioPlantilla()"
       ></textarea>
+
     </div>
 
   </section>
 
-  <!-- PASO 4: RESULTADO FINAL -->
-  <section class="paso activo" *ngIf="contenidoFinal">
+  <!-- ===================================== -->
+  <!-- PASO 4 RESULTADO FINAL -->
+  <!-- ===================================== -->
+  <section
+    class="paso activo"
+    *ngIf="contenidoFinal"
+  >
 
-    <h3>
-      📄 Vista final
-      <span class="hint">Editable</span>
-    </h3>
+    <div class="paso-header">
+
+      <h3>
+        📄 Vista final
+      </h3>
+
+      <span class="badge verde">
+        Generado automáticamente
+      </span>
+
+    </div>
 
     <div class="resultado">
 
+      <!-- HEADER -->
       <div class="resultado-header">
-        <strong>Documento generado</strong>
 
+        <div>
+
+          <strong>
+            {{ plantillaEditable?.nombre }}
+          </strong>
+
+          <p class="producto">
+
+            {{ plantillaEditable?.producto }}
+
+          </p>
+
+        </div>
+
+        <!-- ACCIONES -->
         <div class="acciones">
-          <button class="btn-reset" (click)="procesarContenido()">
+
+          <!-- RESTAURAR -->
+          <button
+            class="btn-reset"
+            (click)="procesarContenido()"
+          >
             🔄 Restaurar
           </button>
 
+          <!-- GUARDAR -->
           <button
             class="btn-guardar"
             (click)="guardarCambios()"
             [disabled]="guardando"
           >
-            💾 {{ guardando ? 'Guardando...' : 'Guardar cambios' }}
+
+            💾
+
+            {{
+              guardando
+                ? 'Guardando...'
+                : 'Guardar cambios'
+            }}
+
           </button>
 
-          <button class="btn-copiar" (click)="copiarContenido()">
+          <!-- COPIAR -->
+          <button
+            class="btn-copiar"
+            (click)="copiarContenido()"
+          >
             📋 Copiar
           </button>
+
         </div>
+
       </div>
 
+      <!-- CONTENIDO FINAL -->
       <textarea
         class="documento"
         [(ngModel)]="contenidoFinal"
-        rows="12"
+        rows="14"
       ></textarea>
 
-      <p class="resolucion" *ngIf="plantillaEditable?.resolucion">
-        📌 Resolución:
-        <b>{{ plantillaEditable.resolucion }}</b>
-      </p>
+      <!-- INFO -->
+      <div class="info-extra">
 
-      <p class="mensaje-guardado" *ngIf="mensajeGuardado">
+        <!-- CATEGORIA -->
+        <div class="info-item">
+
+          <span>
+            📂 Categoría
+          </span>
+
+          <b>
+            {{ plantillaEditable?.categoriaNombre || 'Sin categoría' }}
+          </b>
+
+        </div>
+
+        <!-- TIPO -->
+        <div class="info-item">
+
+          <span>
+            🎫 Tipo ticket
+          </span>
+
+          <b>
+
+            {{
+              plantillaEditable?.tipoId ===
+              '917afff7-bbda-492b-9fd4-12fbfbcb9b9a'
+                ? 'Incidente'
+                : 'Requerimiento'
+            }}
+
+          </b>
+
+        </div>
+
+        <!-- CLIENTE -->
+        <div class="info-item">
+
+          <span>
+            👤 Cliente
+          </span>
+
+          <b>
+            {{ cliente?.nombre }}
+          </b>
+
+        </div>
+
+      </div>
+
+      <!-- RESOLUCION -->
+      <div
+        class="resolucion-box"
+        *ngIf="plantillaEditable?.resolucion"
+      >
+
+        <h4>
+          📌 Resolución
+        </h4>
+
+        <p>
+
+          {{ plantillaEditable.resolucion }}
+
+        </p>
+
+      </div>
+
+      <!-- MENSAJE -->
+      <p
+        class="mensaje-guardado"
+        *ngIf="mensajeGuardado"
+      >
         {{ mensajeGuardado }}
       </p>
 
     </div>
+
+    <!-- BOTON -->
+    <button
+      class="btn-ticket"
+      (click)="crearTicket()"
+    >
+      🎫 Crear ticket en Proactivanet
+    </button>
 
   </section>
 

@@ -1,173 +1,283 @@
-/* CONTENEDOR GENERAL */
+/* =========================================
+   🌍 CONTENEDOR GENERAL
+========================================= */
 .flujo-container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.8rem;
   font-family: "Inter", sans-serif;
   background: #f8fafc;
 }
 
-/* PASOS */
+/* =========================================
+   📦 PASOS
+========================================= */
 .paso {
-  background: white;
-  border-radius: 14px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.6rem;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.06);
   border-left: 6px solid #cbd5e1;
-  transition: all 0.3s ease;
-  animation: fadeIn 0.4s ease;
+  transition: all .3s ease;
+  animation: fadeIn .4s ease;
+}
+
+.paso:hover {
+  transform: translateY(-2px);
+}
+
+.paso.activo {
+  border-left-color: #2563eb;
+  box-shadow: 0 8px 24px rgba(37,99,235,.12);
+}
+
+.paso.bloqueado {
+  opacity: .5;
+  pointer-events: none;
+  filter: grayscale(.7);
+}
+
+.paso-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .paso h3 {
-  margin-bottom: 1rem;
   color: #1e3a8a;
+  margin: 0;
+  font-size: 1.2rem;
 }
 
-/* PASO ACTIVO */
-.paso.activo {
-  border-left-color: #3b82f6;
-  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.15);
+/* =========================================
+   🏷️ BADGES
+========================================= */
+.badge {
+  padding: .35rem .8rem;
+  border-radius: 999px;
+  font-size: .75rem;
+  font-weight: 600;
 }
 
-/* PASO BLOQUEADO */
-.paso.bloqueado {
-  opacity: 0.55;
-  pointer-events: none;
-  filter: grayscale(0.8);
+.badge.azul {
+  background: #dbeafe;
+  color: #1d4ed8;
 }
 
-/* TEXTO DE AYUDA */
+.badge.verde {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.badge.gris {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+/* =========================================
+   💡 TEXTOS
+========================================= */
 .hint {
-  font-size: 0.9rem;
-  font-weight: 400;
   color: #64748b;
-  margin-left: 0.5rem;
+  font-size: .9rem;
+  margin-left: .4rem;
 }
 
-/* RESULTADO */
+/* =========================================
+   🧾 FORMULARIOS
+========================================= */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  margin-bottom: .45rem;
+  font-size: .88rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* INPUTS */
+.form-control,
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 14px;
+  padding: .85rem 1rem;
+  font-size: .95rem;
+  background: #f8fafc;
+  transition: .2s ease;
+  font-family: inherit;
+}
+
+.form-control:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(59,130,246,.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.textarea-grande {
+  min-height: 160px;
+}
+
+/* =========================================
+   📄 RESULTADO FINAL
+========================================= */
 .resultado {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   background: #ffffff;
-  border-radius: 16px;
-  padding: 1rem;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  border-radius: 18px;
+  padding: 1.2rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,.07);
 }
 
 .resultado-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.6rem;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.btn-copiar {
-  background: #3b82f6;
-  color: white;
-  border: none;
-  padding: 0.4rem 0.9rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 0.85rem;
-  transition: all 0.2s ease;
+.resultado-header strong {
+  color: #1e293b;
+  font-size: 1rem;
 }
 
-.btn-copiar:hover {
-  background: #2563eb;
-}
-
+/* =========================================
+   📑 DOCUMENTO
+========================================= */
 .documento {
   width: 100%;
-  min-height: 240px;
+  min-height: 340px;
   resize: vertical;
-  border-radius: 12px;
+  border-radius: 16px;
   border: 1px solid #d1d5db;
-  padding: 0.8rem;
+  padding: 1rem;
   font-family: monospace;
-  font-size: 0.9rem;
+  font-size: .94rem;
   background: #f9fafb;
+  transition: .2s;
+  line-height: 1.6;
 }
 
 .documento:focus {
   outline: none;
   border-color: #3b82f6;
   background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59,130,246,.12);
 }
 
-.resolucion {
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-  color: #374151;
-}
-
-.btn-reset {
-  background: #e5e7eb;
-  border: none;
-  padding: 0.4rem 0.9rem;
-  border-radius: 10px;
-    cursor: pointer;
-}
-
-/* FORMULARIOS */
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.form-group {
+/* =========================================
+   🧩 INFORMACIÓN EXTRA
+========================================= */
+.info-extra {
   display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-  margin-bottom: 0.8rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.form-group label {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #374151;
+.info-item {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 1rem;
+  border-radius: 14px;
+  min-width: 220px;
+  flex: 1;
 }
 
-/* INPUTS / TEXTAREAS */
-.form-group input,
-.form-group textarea {
-  border-radius: 12px;
-  border: 1px solid #d1d5db;
-  padding: 0.55rem 0.7rem;
-  font-size: 0.9rem;
-  font-family: "Inter", sans-serif;
-  background: #f9fafb;
-  transition: all 0.2s ease;
+.info-item span {
+  display: block;
+  font-size: .8rem;
+  color: #64748b;
+  margin-bottom: .3rem;
 }
 
-.form-group textarea {
-  resize: vertical;
+.info-item strong {
+  color: #1e293b;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: #3b82f6;
-  background: #ffffff;
+/* =========================================
+   📌 RESOLUCIÓN
+========================================= */
+.resolucion-box {
+  background: #f8fafc;
+  border-left: 5px solid #3b82f6;
+  padding: 1rem;
+  border-radius: 14px;
 }
 
-/* ACCIONES */
+.resolucion-box h4 {
+  margin: 0 0 .6rem;
+  color: #1e3a8a;
+}
+
+.resolucion-box p {
+  margin: 0;
+  color: #334155;
+  line-height: 1.5;
+}
+
+/* =========================================
+   🎛️ BOTONES
+========================================= */
 .acciones {
   display: flex;
-  gap: 0.5rem;
+  gap: .7rem;
   flex-wrap: wrap;
 }
 
+.btn-ticket,
+.btn-guardar,
+.btn-copiar,
+.btn-reset {
+  border: none;
+  border-radius: 12px;
+  padding: .75rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all .2s ease;
+  font-size: .9rem;
+}
+
+/* CREAR TICKET */
+.btn-ticket {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  box-shadow: 0 4px 12px rgba(37,99,235,.25);
+}
+
+.btn-ticket:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37,99,235,.35);
+}
+
+/* GUARDAR */
 .btn-guardar {
   background: #16a34a;
   color: white;
-  border: none;
-  padding: 0.4rem 0.9rem;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 0.85rem;
 }
 
 .btn-guardar:hover {
@@ -175,25 +285,248 @@
 }
 
 .btn-guardar:disabled {
-  opacity: 0.6;
+  opacity: .6;
   cursor: not-allowed;
 }
 
-/* MENSAJE */
-.mensaje-guardado {
-  margin-top: 0.6rem;
-  font-size: 0.85rem;
-  color: #16a34a;
+/* COPIAR */
+.btn-copiar {
+  background: #0ea5e9;
+  color: white;
 }
 
-/* ANIMACIÓN */
+.btn-copiar:hover {
+  background: #0284c7;
+}
+
+/* RESET */
+.btn-reset {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.btn-reset:hover {
+  background: #cbd5e1;
+}
+
+/* =========================================
+   ✅ MENSAJE GUARDADO
+========================================= */
+.mensaje-guardado {
+  background: #dcfce7;
+  color: #166534;
+  padding: .9rem 1rem;
+  border-radius: 12px;
+  font-weight: 500;
+  animation: fadeIn .3s ease;
+}
+
+
+/* =========================================
+   🌈 SCROLL PERSONALIZADO
+========================================= */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* =========================================
+   ✨ EFECTO GLASS
+========================================= */
+.paso,
+.resultado {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* =========================================
+   🎯 SELECTS MODERNOS
+========================================= */
+select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image:
+    linear-gradient(45deg, transparent 50%, #64748b 50%),
+    linear-gradient(135deg, #64748b 50%, transparent 50%);
+
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px);
+
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+
+  cursor: pointer;
+}
+
+/* =========================================
+   🔥 HOVER INPUTS
+========================================= */
+.form-control:hover,
+.documento:hover {
+  border-color: #93c5fd;
+}
+
+/* =========================================
+   🎨 SOMBRA PREMIUM
+========================================= */
+.paso:hover,
+.resultado:hover {
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.08),
+    0 4px 10px rgba(37,99,235,.08);
+}
+
+/* =========================================
+   📄 DOCUMENTO MÁS PRO
+========================================= */
+.documento {
+  background:
+    linear-gradient(to bottom, #ffffff, #f8fafc);
+
+  box-shadow:
+    inset 0 1px 3px rgba(0,0,0,.04);
+
+  line-height: 1.7;
+}
+
+/* =========================================
+   📌 HEADER STICKY OPCIONAL
+========================================= */
+.paso-header {
+  position: sticky;
+  top: 0;
+  background: white;
+  z-index: 2;
+  padding-bottom: .5rem;
+}
+
+/* =========================================
+   ⚡ ANIMACIÓN BOTONES
+========================================= */
+.btn-ticket:active,
+.btn-guardar:active,
+.btn-copiar:active,
+.btn-reset:active {
+  transform: scale(.97);
+}
+
+/* =========================================
+   🎫 BOTÓN TICKET MÁS PRO
+========================================= */
+.btn-ticket {
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 1rem;
+  letter-spacing: .3px;
+}
+
+/* =========================================
+   💬 MENSAJES
+========================================= */
+.mensaje-guardado {
+  border-left: 5px solid #16a34a;
+}
+
+/* =========================================
+   📦 INFO ITEMS HOVER
+========================================= */
+.info-item {
+  transition: .25s ease;
+}
+
+.info-item:hover {
+  transform: translateY(-3px);
+  background: #dbeafe;
+}
+
+/* =========================================
+   🌟 TITULOS
+========================================= */
+h3 {
+  letter-spacing: -.3px;
+}
+
+/* =========================================
+   📱 MOBILE EXTRA
+========================================= */
+@media (max-width: 640px) {
+
+  .paso {
+    padding: 1rem;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-item {
+    min-width: 100%;
+  }
+
+  .btn-ticket,
+  .btn-guardar,
+  .btn-copiar,
+  .btn-reset {
+    width: 100%;
+  }
+
+}
+/* =========================================
+   ✨ ANIMACIONES
+========================================= */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* =========================================
+   📱 RESPONSIVE
+========================================= */
+@media (max-width: 768px) {
+
+  .flujo-container {
+    padding: 1rem;
+  }
+
+  .resultado-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .acciones {
+    width: 100%;
+  }
+
+  .acciones button {
+    flex: 1;
+  }
+
+  .documento {
+    min-height: 260px;
+  }
+
 }

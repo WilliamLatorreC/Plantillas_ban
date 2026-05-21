@@ -10,6 +10,7 @@ import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import clientesRoutes from "./routes/clientes.js";
 import plantillasRoutes from "./routes/plantillas.js";
+import proactivanetRoutes from './routes/proactivanet.js';
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use(cors({
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/api/proactivanet', proactivanetRoutes);
 
 // ===========================
 // 2. CONEXIÓN MONGO
