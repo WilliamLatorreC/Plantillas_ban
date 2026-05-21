@@ -6,8 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProactivanetService {
 
-  private apiUrl = 'http://localhost:3000/api/proactivanet';
-
+  //private apiUrl = 'http://localhost:3000/api/proactivanet';
+  private apiUrl = 'https://plantillas-ban.onrender.com/api/proactivanet';
   constructor(private http: HttpClient) {}
 
   crearTicket(data: any) {
