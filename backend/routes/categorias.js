@@ -7,14 +7,24 @@ import mongoose, { Types } from "mongoose";
 const router = express.Router();
 
 // 🔹 Obtener todas las categorías
-router.get("/", verifyToken, async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const categorias = await Categoria.find()
-      .populate("plantillaId", "nombre producto");
+
+    const categorias = await Categoria.find();
+
     res.json(categorias);
+
   } catch (error) {
-    console.error("❌ Error detallado al obtener categorías:", error);
-    res.status(500).json({ error: "Error al obtener las categorías" });
+
+    console.error(
+      "❌ Error detallado al obtener categorías:",
+      error
+    );
+
+    res.status(500).json({
+      error: "Error al obtener categorías"
+    });
+
   }
 });
 

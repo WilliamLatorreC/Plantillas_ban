@@ -1,14 +1,30 @@
 import mongoose from "mongoose";
 
 const categoriaSchema = new mongoose.Schema({
-  nombre: { type: String, required: true },
-  descripcion: { type: String },
-  tipo: { 
-      type: String, 
-      enum: ["Requerimiento", "Incidencia"],
-      required: true 
-    },
-  plantillaId: { type: mongoose.Schema.Types.ObjectId, ref: "Plantilla" }
+
+  nombre: {
+    type: String,
+    required: true
+  },
+
+  typeId: {
+    type: String,
+    required: true
+  },
+
+  categoryId: {
+    type: String,
+    required: true
+  },
+
+  portfolioId: {
+    type: String,
+    required: true
+  }
+
 });
 
-export default mongoose.model('Categoria', categoriaSchema);
+export default mongoose.model(
+  "Categoria",
+  categoriaSchema
+);

@@ -82,7 +82,23 @@ router.get('/categorias/buscar', async (req, res) => {
 
     console.log(response.data);
 
-    res.json(response.data);
+      res.json(response.data);
+
+      response.data.forEach(c => {
+
+      console.log('----------------');
+
+      console.log('Name:', c.Name);
+
+      console.log('Id:', c.Id);
+
+      console.log('PadCategories_id:', c.PadCategories_id);
+
+    });
+
+    console.log(
+      JSON.stringify(response.data.slice(0, 10), null, 2)
+    );
 
   } catch (error) {
 
@@ -93,6 +109,258 @@ router.get('/categorias/buscar', async (req, res) => {
     res.status(500).json({
       error: error.response?.data
     });
+
+  }
+
+});
+
+router.get('/portfolio/:id/categories', async (req, res) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const response = await axios.get(
+      `${BASE_URL}/api/Portfolio/${id}/relatedCategories`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    );
+
+    res.json(response.data);
+
+  } catch (error) {
+
+    console.error(
+      'Error obteniendo categorías:',
+      error.response?.data || error
+    );
+
+    res.status(500).json({
+      error: 'Error obteniendo categorías'
+    });
+
+  }
+
+});
+
+router.get('/portfolio', async (req, res) => {
+
+  try {
+
+    const response = await axios.get(
+      'https://ban100.proactivanet.com/proactivanet/api/Portfolio',
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PROACTIVANET_TOKEN}`,
+          Accept: 'application/json'
+        }
+      }
+    );
+
+    console.log('SERVICIOS PROACTIVANET');
+    console.log(response.data);
+
+    res.json(response.data);
+
+  } catch (error) {
+
+    console.log('ERROR PORTFOLIO');
+
+    if (error.response) {
+
+      console.log(error.response.status);
+      console.log(error.response.data);
+
+      res.status(error.response.status).json(
+        error.response.data
+      );
+
+    } else {
+
+      console.log(error.message);
+
+      res.status(500).json({
+        error: error.message
+      });
+
+    }
+
+  }
+
+});
+
+
+//Prueba
+
+router.get('/classifications', async (req, res) => {
+
+  try {
+
+    const response = await axios.get(
+      'https://ban100.proactivanet.com/proactivanet/api/Classifications',
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PROACTIVANET_TOKEN}`,
+          Accept: 'application/json'
+        }
+      }
+    );
+
+    res.json(response.data);
+
+  } catch (error) {
+
+    console.error(
+      error.response?.data || error.message
+    );
+
+    res.status(
+      error.response?.status || 500
+    ).json(
+      error.response?.data || {
+        error: error.message
+      }
+    );
+
+  }
+
+});
+
+router.get('/portfolio/:id', async (req, res) => {
+  try {
+
+    const response = await axios.get(
+      `https://ban100.proactivanet.com/proactivanet/api/Classifications/${req.params.id}/portfolio`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PROACTIVANET_TOKEN}`,
+          Accept: 'application/json'
+        }
+      }
+    );
+
+    res.json(response.data);
+
+  } catch (error) {
+
+    console.log(error.response?.data || error.message);
+
+    res.status(500).json(error.response?.data || error.message);
+
+  }
+});
+
+router.get('/portfolio/:id/relatedCategories', async (req, res) => {
+
+  try {
+
+    const { id } = req.params;
+
+    const response = await axios.get(
+      `https://ban100.proactivanet.com/proactivanet/api/Portfolio/${id}/relatedCategories`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PROACTIVANET_TOKEN}`,
+          Accept: 'application/json'
+        }
+      }
+    );
+
+    console.log('CATEGORIAS DEL SERVICIO');
+    console.log(response.data);
+
+    res.json(response.data);
+
+  } catch (error) {
+
+    console.log('ERROR RELATED CATEGORIES');
+
+    if (error.response) {
+
+      console.log(error.response.status);
+      console.log(error.response.data);
+
+      res.status(error.response.status).json(error.response.data);
+
+    } else {
+
+      console.log(error.message);
+
+      res.status(500).json({
+        error: error.message
+      });
+
+    }
+
+  }
+
+});
+
+router.get('/categoria/:id', async (req, res) => {
+
+  try {
+
+    const response = await axios.get(
+      `https://ban100.proactivanet.com/proactivanet/api/Categories/${req.params.id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PROACTIVANET_TOKEN}`,
+          Accept: 'application/json'
+        }
+      }
+    );
+
+    console.log('DETALLE CATEGORIA');
+    console.log(JSON.stringify(response.data, null, 2));
+
+    
+
+    res.json(response.data);
+
+  } catch (error) {
+
+    console.log(
+      error.response?.data || error.message
+    );
+
+    res.status(
+      error.response?.status || 500
+    ).json(
+      error.response?.data || {
+        error: error.message
+      }
+    );
+
+  }
+
+});
+
+router.get('/categoria/:id/hijos', async (req, res) => {
+
+  try {
+
+    const response = await axios.get(
+      `https://ban100.proactivanet.com/proactivanet/api/categories/${req.params.id}/children`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.PROACTIVANET_TOKEN}`,
+          Accept: 'application/json'
+        }
+      }
+    );
+
+    res.json(response.data);
+
+  } catch (error) {
+
+    res.status(
+      error.response?.status || 500
+    ).json(
+      error.response?.data || error.message
+    );
 
   }
 

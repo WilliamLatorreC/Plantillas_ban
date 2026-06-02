@@ -7,6 +7,7 @@ import { ListTemplatesComponent } from '../list-templates/list-templates.compone
 
 import { PlantillaService } from '../../services/plantilla.service';
 import { ProactivanetService } from '../../services/proactivanet.service';
+import { CategoriaService } from '../../services/categoria.service';
 
 @Component({
   selector: 'app-flujo',
@@ -40,7 +41,23 @@ export class FlujoComponent implements OnInit {
 
   categorias: any[] = [];
 
+  servicios: any[] = [];
+
   cargandoCategorias = false;
+
+  servicioSeleccionado = '';
+
+  tipoSeleccionado = '';
+
+  serviciosFiltrados: any[] = [];
+
+  categoriasFiltradas: any[] = [];
+
+  categoriaSeleccionada: any = null;
+
+  categoriasServicio: any[] = [];
+
+  categoriaSeleccionadaId = '';
 
   // =========================
   // CONSTRUCTOR
@@ -48,17 +65,16 @@ export class FlujoComponent implements OnInit {
 
   constructor(
     private plantillaService: PlantillaService,
-    private proactivanetService: ProactivanetService
+    private proactivanetService: ProactivanetService,
+    private categoriaService: CategoriaService,
   ) {}
 
   // =========================
   // INIT
   // =========================
 
-  ngOnInit(): void {
-
-    this.cargarCategorias();
-
+  ngOnInit() {
+    this.cargarServicios();
   }
 
   // =========================
@@ -170,14 +186,6 @@ export class FlujoComponent implements OnInit {
 
       resolucion: this.plantillaEditable.resolucion,
 
-      categoriaId: this.plantillaEditable.categoriaId,
-
-      categoriaNombre: this.plantillaEditable.categoriaNombre,
-
-      tipoId: this.plantillaEditable.tipoId,
-
-      prioridadId: this.plantillaEditable.prioridadId
-
     };
 
     this.plantillaService
@@ -216,13 +224,13 @@ export class FlujoComponent implements OnInit {
 
     this.cargandoCategorias = true;
 
-    this.proactivanetService
-      .obtenerCategorias()
+    this.categoriaService
+      .getCategorias()
       .subscribe({
 
         next: (data: any) => {
 
-          console.log('✅ Categorías:', data);
+          console.log('✅ Categorías Mongo:', data);
 
           this.categorias = data;
 
@@ -242,29 +250,121 @@ export class FlujoComponent implements OnInit {
 
   }
 
+  cargarServicios() {
+
+  this.proactivanetService
+    .getServicios()
+    .subscribe({
+
+      next: (data:any) => {
+
+        console.log('SERVICIOS');
+        console.log(data);
+
+        this.servicios = data;
+        this.serviciosFiltrados = data;
+
+      }
+
+    });
+
+}
+
   // =========================
   // CAMBIO DE CATEGORIA
   // =========================
 
   onCategoriaChange(event: any) {
 
-    const categoriaId = event.target.value;
+    const categoriaMongoId =
+      event.target.value;
 
-    const categoriaSeleccionada = this.categorias.find(
-      (c: any) =>
-        c.Id === categoriaId ||
-        c.id === categoriaId
+    const categoria =
+      this.categorias.find(
+        (c: any) => c._id === categoriaMongoId
+      );
+
+    if (!categoria) return;
+
+      // NOMBRE
+      this.plantillaEditable.categoriaNombre =
+        categoria.nombre;
+
+      // CATEGORY ID PROACTIVANET
+      this.plantillaEditable.categoriaId =
+        categoria.categoryId;
+
+      // TYPE ID PROACTIVANET
+      this.plantillaEditable.tipoId =
+        categoria.typeId;
+
+      // PORTFOLIO
+      this.plantillaEditable.portfolio =
+        categoria.portfolio;
+
+      console.log(
+        '✅ Categoría seleccionada:',
+        categoria
     );
 
-    if (!categoriaSeleccionada) return;
+  }
 
-    this.plantillaEditable.categoriaId =
-      categoriaSeleccionada.Id || categoriaSeleccionada.id;
+  filtrarServicios() {
 
-    this.plantillaEditable.categoriaNombre =
-      categoriaSeleccionada.Name || categoriaSeleccionada.name;
+    console.log(this.servicios[0]);
+    console.log(this.servicios);
+    console.log(this.serviciosFiltrados);
 
-    console.log('📁 Categoría seleccionada:', categoriaSeleccionada);
+    this.serviciosFiltrados = this.servicios;
+
+  }
+
+  filtrarCategorias() {
+
+  this.categoriasFiltradas =
+    this.categorias.filter(
+      x => x.typeId === this.tipoSeleccionado
+    );
+
+}
+
+  onServicioChange() {
+
+    this.proactivanetService
+      .getCategoriasServicio(this.servicioSeleccionado)
+      .subscribe({
+
+        next: (data: any) => {
+
+          console.log('Categorias del servicio');
+          console.log(data);
+
+          this.categoriasServicio = data;
+
+        },
+
+        error: (err) => {
+
+          console.error(err);
+
+        }
+
+      });
+
+  }
+
+  onCategoriaSeleccionada() {
+
+    const categoria =
+      this.categoriasServicio.find(
+        x => x.PadCategories_id === this.categoriaSeleccionadaId
+      );
+
+    if (!categoria) return;
+
+    this.categoriaSeleccionada = categoria;
+
+    console.log(categoria);
 
   }
 
@@ -284,34 +384,26 @@ export class FlujoComponent implements OnInit {
 
     const body = {
 
-      Title:
-        this.plantillaEditable.nombre || 'Ticket generado',
+      Title: this.plantillaEditable.nombre,
 
-      Description:
-        this.contenidoFinal,
+      Description: this.contenidoFinal,
 
       FederatedCode: '',
 
-      // USUARIO
       PanUsers_idSource:
         'ef000a02-b987-4197-bf3c-1d2f994c0af6',
 
-      // ORIGEN
       PadSources_id:
         '2a8d3b77-74f6-447d-af3e-f323802ecb94',
 
-      // TIPO
       PadTypes_id:
-        this.plantillaEditable.tipoId ||
-        'b4b431c5-2561-404d-ac39-52096de42969',
+        this.tipoSeleccionado,
 
-      // CATEGORIA
+      PadPortfolio_id:
+        this.servicioSeleccionado,
+
       PadCategories_id:
-        this.plantillaEditable.categoriaId,
-
-      // PRIORIDAD
-      PadPriorities_id:
-        this.plantillaEditable.prioridadId || null,
+        this.categoriaSeleccionadaId,
 
       SendUserNotification: true
 

@@ -64,6 +64,12 @@ const plantillaSchema = new mongoose.Schema(
     default: ""
   },
 
+    // Portfolio Proactivanet
+  portfolio: {
+    type: String,
+    required: false
+  },
+
   // =====================================
   // RELACIONES
   // =====================================

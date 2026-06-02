@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class UsuariosService {
 
   private api = 'https://plantillas-ban.onrender.com/api/auth';
-  ////private api = "http://localhost:3000/api/auth";
+  //private api = "http://localhost:3000/api/auth";
   constructor(private http: HttpClient) {}   
 
    buscar(q: string) {

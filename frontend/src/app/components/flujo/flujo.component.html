@@ -104,62 +104,69 @@
 
       </div>
 
-      <!-- CATEGORIA -->
-      <div class="form-group">
-
-        <label>
-          Categoría Proactivanet
-        </label>
-
-       <input
-        type="text"
-        class="form-control"
-        placeholder="Buscar categoría..."
-        (input)="buscarCategorias($event)"
-      >
-
+      <!-- Tipo -->
       <select
         class="form-control"
-        [(ngModel)]="plantillaEditable.categoriaId"
+        [(ngModel)]="tipoSeleccionado"
+        (change)="filtrarServicios()"
       >
+        <option value="">
+          Seleccionar tipo
+        </option>
 
-        <option
-          *ngFor="let cat of categorias"
-          [value]="cat.Id"
-        >
-          {{ cat.Name }}
+        <option value="b4b431c5-2561-404d-ac39-52096de42969">
+          Requerimiento
+        </option>
+
+        <option value="917afff7-bbda-492b-9fd4-12fbfbcb9b9a">
+          Incidente
         </option>
 
       </select>
 
-      </div>
+      <!-- SERVICIO -->
 
-      <!-- TIPO -->
+     <select
+      class="form-control"
+      [(ngModel)]="servicioSeleccionado"
+      (change)="onServicioChange()"
+    >
+      <option value="">
+        Seleccionar servicio
+      </option>
+
+      <option
+        *ngFor="let servicio of serviciosFiltrados"
+        [value]="servicio.Id"
+      >
+        {{ servicio.Name }}
+      </option>
+
+    </select>
+
+      <!-- Categoria -->
+
       <div class="form-group">
 
         <label>
-          Tipo ticket
+          Categoría
         </label>
 
         <select
           class="form-control"
-          [(ngModel)]="plantillaEditable.tipoId"
+          [(ngModel)]="categoriaSeleccionadaId"
+          (change)="onCategoriaSeleccionada()"
         >
 
           <option value="">
-            Seleccionar tipo
+            Seleccionar categoría
           </option>
 
           <option
-            value="b4b431c5-2561-404d-ac39-52096de42969"
+            *ngFor="let cat of categoriasServicio"
+            [value]="cat.PadCategories_id"
           >
-            Requerimiento
-          </option>
-
-          <option
-            value="917afff7-bbda-492b-9fd4-12fbfbcb9b9a"
-          >
-            Incidente
+            {{ cat.PadCategoriesPath }}
           </option>
 
         </select>
