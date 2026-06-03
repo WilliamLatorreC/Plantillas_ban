@@ -59,6 +59,10 @@ export class FlujoComponent implements OnInit {
 
   categoriaSeleccionadaId = '';
 
+  subcategorias: any[] = [];
+
+  subcategoriaSeleccionada = '';
+
   // =========================
   // CONSTRUCTOR
   // =========================
@@ -355,16 +359,25 @@ export class FlujoComponent implements OnInit {
 
   onCategoriaSeleccionada() {
 
-    const categoria =
-      this.categoriasServicio.find(
-        x => x.PadCategories_id === this.categoriaSeleccionadaId
-      );
+    console.log('Categoria seleccionada');
+    console.log(this.categoriaSeleccionadaId);
 
-    if (!categoria) return;
+    this.proactivanetService
+      .getHijosCategoria(this.categoriaSeleccionadaId)
+      .subscribe({
 
-    this.categoriaSeleccionada = categoria;
+        next: (data:any) => {
 
-    console.log(categoria);
+          console.log('SUBCATEGORIAS');
+          console.log(data);
+
+          this.subcategorias = data;
+
+        },
+
+        error: err => console.error(err)
+
+      });
 
   }
 
@@ -403,7 +416,7 @@ export class FlujoComponent implements OnInit {
         this.servicioSeleccionado,
 
       PadCategories_id:
-        this.categoriaSeleccionadaId,
+        this.subcategoriaSeleccionada,
 
       SendUserNotification: true
 

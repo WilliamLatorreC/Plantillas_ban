@@ -49,4 +49,11 @@ export class ProactivanetService {
     );
 
   }
+
+  getHijosCategoria(id:string) {
+    return this.http.get(
+      `${this.apiUrl}/categoria/${id}/hijos`,
+      {}
+    );
+  }
 }

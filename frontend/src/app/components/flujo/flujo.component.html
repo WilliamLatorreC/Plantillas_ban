@@ -199,6 +199,33 @@
 
     </div>
 
+    <!-- SUBCATEGORÍA -->
+    <div class="form-group">
+
+      <label>
+        Subcategoría
+      </label>
+
+      <select
+        class="form-control"
+        [(ngModel)]="subcategoriaSeleccionada"
+      >
+
+        <option value="">
+          Seleccionar subcategoría
+        </option>
+
+        <option
+          *ngFor="let sub of subcategorias"
+          [value]="sub.Id"
+        >
+          {{ sub.Name }}
+        </option>
+
+      </select>
+
+    </div>
+
     <!-- CONTENIDO -->
     <div class="form-group">
 
