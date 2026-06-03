@@ -168,6 +168,22 @@ export class FlujoComponent implements OnInit {
 
   }
 
+  onTipoChange() {
+
+    console.log('TIPO CAMBIADO:', this.tipoSeleccionado);
+
+    this.servicioSeleccionado = '';
+
+    this.categoriaSeleccionadaId = '';
+
+    this.subcategoriaSeleccionada = '';
+
+    this.categoriasServicio = [];
+
+    this.subcategorias = [];
+
+  }
+
   // =========================
   // GUARDAR CAMBIOS
   // =========================
@@ -334,6 +350,12 @@ export class FlujoComponent implements OnInit {
 
   onServicioChange() {
 
+    this.categoriaSeleccionadaId = '';
+
+    this.subcategoriaSeleccionada = '';
+
+    this.subcategorias = [];
+
     this.proactivanetService
       .getCategoriasServicio(this.servicioSeleccionado)
       .subscribe({
@@ -362,6 +384,8 @@ export class FlujoComponent implements OnInit {
     console.log('Categoria seleccionada');
     console.log(this.categoriaSeleccionadaId);
 
+    this.subcategoriaSeleccionada = '';
+
     this.proactivanetService
       .getHijosCategoria(this.categoriaSeleccionadaId)
       .subscribe({
@@ -369,7 +393,7 @@ export class FlujoComponent implements OnInit {
         next: (data:any) => {
 
           console.log('SUBCATEGORIAS');
-          console.log(data);
+          console.table(data);
 
           this.subcategorias = data;
 
