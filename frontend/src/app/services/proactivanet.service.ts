@@ -47,7 +47,7 @@ export class ProactivanetService {
 
     return this.http.get(
       //`http://localhost:3000/api/proactivanet/portfolio/${id}/relatedCategories`
-      'https://plantillas-ban.onrender.com/api/proactivanet/portfolio/${id}/relatedCategories'
+      `https://plantillas-ban.onrender.com/api/proactivanet/portfolio/${id}/relatedCategories`
     );
 
   }
