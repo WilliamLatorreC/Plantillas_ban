@@ -38,14 +38,16 @@ export class ProactivanetService {
 
   getServicios() {
     return this.http.get(
-      'http://localhost:3000/api/proactivanet/portfolio'
+      //'http://localhost:3000/api/proactivanet/portfolio'
+      'https://plantillas-ban.onrender.com/api/proactivanet/portfolio';
     );
   }
 
   getCategoriasServicio(id: string) {
 
     return this.http.get(
-      `http://localhost:3000/api/proactivanet/portfolio/${id}/relatedCategories`
+      //`http://localhost:3000/api/proactivanet/portfolio/${id}/relatedCategories`
+      'https://plantillas-ban.onrender.com/api/proactivanet/portfolio/${id}/relatedCategories';
     );
 
   }
